@@ -59152,7 +59152,7 @@ const router = createBrowserRouter(
     }
   ],
   {
-    basename: "/gaia/"
+    basename: "/gaia-staging/"
   }
 );
 function Root() {
