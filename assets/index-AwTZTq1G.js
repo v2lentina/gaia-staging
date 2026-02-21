@@ -32041,7 +32041,7 @@ const {
   mergeConfig
 } = axios;
 
-const API_BASE_URL = "https://api-staging.yourdomain.com";
+const API_BASE_URL = "https://rest-api-gaia.onrender.com";
 const searchCountriesByName = async (searchTerm) => {
   if (!searchTerm.trim()) return [];
   const { data } = await axios.get(
