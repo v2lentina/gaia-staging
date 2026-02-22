@@ -32478,7 +32478,7 @@ class ApiError extends Error {
   }
 }
 
-const API_BASE_URL = undefined                                 ;
+const API_BASE_URL = "https://rest-api-gaia.onrender.com";
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 1e4
