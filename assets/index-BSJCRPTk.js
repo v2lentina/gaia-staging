@@ -4499,41 +4499,41 @@ function createDeferred() {
     reject
   };
 }
-const React$1s = await importShared('react');
+const React$1t = await importShared('react');
 
-var DataRouterContext = React$1s.createContext(null);
+var DataRouterContext = React$1t.createContext(null);
 DataRouterContext.displayName = "DataRouter";
-var DataRouterStateContext = React$1s.createContext(null);
+var DataRouterStateContext = React$1t.createContext(null);
 DataRouterStateContext.displayName = "DataRouterState";
-var RSCRouterContext = React$1s.createContext(false);
+var RSCRouterContext = React$1t.createContext(false);
 function useIsRSCRouterContext() {
-  return React$1s.useContext(RSCRouterContext);
+  return React$1t.useContext(RSCRouterContext);
 }
-var ViewTransitionContext = React$1s.createContext({
+var ViewTransitionContext = React$1t.createContext({
   isTransitioning: false
 });
 ViewTransitionContext.displayName = "ViewTransition";
-var FetchersContext = React$1s.createContext(
+var FetchersContext = React$1t.createContext(
   /* @__PURE__ */ new Map()
 );
 FetchersContext.displayName = "Fetchers";
-var AwaitContext = React$1s.createContext(null);
+var AwaitContext = React$1t.createContext(null);
 AwaitContext.displayName = "Await";
-var NavigationContext = React$1s.createContext(
+var NavigationContext = React$1t.createContext(
   null
 );
 NavigationContext.displayName = "Navigation";
-var LocationContext = React$1s.createContext(
+var LocationContext = React$1t.createContext(
   null
 );
 LocationContext.displayName = "Location";
-var RouteContext = React$1s.createContext({
+var RouteContext = React$1t.createContext({
   outlet: null,
   matches: [],
   isDataRoute: false
 });
 RouteContext.displayName = "Route";
-var RouteErrorContext = React$1s.createContext(null);
+var RouteErrorContext = React$1t.createContext(null);
 RouteErrorContext.displayName = "RouteError";
 const React2 = await importShared('react');
 
@@ -4631,11 +4631,6 @@ function useOutlet(context) {
     return /* @__PURE__ */ React2.createElement(OutletContext.Provider, { value: context }, outlet);
   }
   return outlet;
-}
-function useParams() {
-  let { matches } = React2.useContext(RouteContext);
-  let routeMatch = matches[matches.length - 1];
-  return routeMatch ? routeMatch.params : {};
 }
 function useResolvedPath(to, { relative } = {}) {
   let { matches } = React2.useContext(RouteContext);
@@ -4944,6 +4939,24 @@ function useRouteId() {
     "useRouteId"
     /* UseRouteId */
   );
+}
+function useNavigation() {
+  let state = useDataRouterState(
+    "useNavigation"
+    /* UseNavigation */
+  );
+  return state.navigation;
+}
+function useLoaderData() {
+  let state = useDataRouterState(
+    "useLoaderData"
+    /* UseLoaderData */
+  );
+  let routeId = useCurrentRouteId(
+    "useLoaderData"
+    /* UseLoaderData */
+  );
+  return state.loaderData[routeId];
 }
 function useRouteError() {
   let error = React2.useContext(RouteErrorContext);
@@ -6641,12 +6654,12 @@ function useViewTransitionState(to, { relative } = {}) {
 }
 await importShared('react');
 
-const React$1r = await importShared('react');
+const React$1s = await importShared('react');
 
 const ReactDOM$2 = await importShared('react-dom');
 
 function RouterProvider2(props) {
-  return /* @__PURE__ */ React$1r.createElement(RouterProvider, { flushSync: ReactDOM$2.flushSync, ...props });
+  return /* @__PURE__ */ React$1s.createElement(RouterProvider, { flushSync: ReactDOM$2.flushSync, ...props });
 }
 await importShared('react');
 
@@ -8377,22 +8390,22 @@ function serializeStyles(args, registered, mergedProps) {
   };
 }
 
-const React$1q = await importShared('react');
+const React$1r = await importShared('react');
 
 
 var syncFallback = function syncFallback(create) {
   return create();
 };
 
-var useInsertionEffect = React$1q['useInsertion' + 'Effect'] ? React$1q['useInsertion' + 'Effect'] : false;
+var useInsertionEffect = React$1r['useInsertion' + 'Effect'] ? React$1r['useInsertion' + 'Effect'] : false;
 var useInsertionEffectAlwaysWithSyncFallback = useInsertionEffect || syncFallback;
-var useInsertionEffectWithLayoutFallback = useInsertionEffect || React$1q.useLayoutEffect;
+var useInsertionEffectWithLayoutFallback = useInsertionEffect || React$1r.useLayoutEffect;
 
-const React$1p = await importShared('react');
+const React$1q = await importShared('react');
 
 const {useContext: useContext$1,forwardRef: forwardRef$1} = await importShared('react');
 
-var EmotionCacheContext = /* #__PURE__ */React$1p.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
+var EmotionCacheContext = /* #__PURE__ */React$1q.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
 // because this module is primarily intended for the browser and node
 // but it's also required in react native and similar environments sometimes
 // and we could have a special build just for that
@@ -8412,7 +8425,7 @@ var withEmotionCache = function withEmotionCache(func) {
   });
 };
 
-var ThemeContext$1 = /* #__PURE__ */React$1p.createContext({});
+var ThemeContext$1 = /* #__PURE__ */React$1q.createContext({});
 
 var hasOwn = {}.hasOwnProperty;
 
@@ -8463,7 +8476,7 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
     className = props.className + " ";
   }
 
-  var serialized = serializeStyles(registeredStyles, undefined, React$1p.useContext(ThemeContext$1));
+  var serialized = serializeStyles(registeredStyles, undefined, React$1q.useContext(ThemeContext$1));
 
   className += cache.key + "-" + serialized.name;
   var newProps = {};
@@ -8480,23 +8493,23 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
     newProps.ref = ref;
   }
 
-  return /*#__PURE__*/React$1p.createElement(React$1p.Fragment, null, /*#__PURE__*/React$1p.createElement(Insertion$1, {
+  return /*#__PURE__*/React$1q.createElement(React$1q.Fragment, null, /*#__PURE__*/React$1q.createElement(Insertion$1, {
     cache: cache,
     serialized: serialized,
     isStringTag: typeof WrappedComponent === 'string'
-  }), /*#__PURE__*/React$1p.createElement(WrappedComponent, newProps));
+  }), /*#__PURE__*/React$1q.createElement(WrappedComponent, newProps));
 });
 
 var Emotion$1 = Emotion;
 
-const React$1o = await importShared('react');
+const React$1p = await importShared('react');
 
 var jsx = function jsx(type, props) {
   // eslint-disable-next-line prefer-rest-params
   var args = arguments;
 
   if (props == null || !hasOwn.call(props, 'css')) {
-    return React$1o.createElement.apply(undefined, args);
+    return React$1p.createElement.apply(undefined, args);
   }
 
   var argsLength = args.length;
@@ -8508,7 +8521,7 @@ var jsx = function jsx(type, props) {
     createElementArgArray[i] = args[i];
   }
 
-  return React$1o.createElement.apply(null, createElementArgArray);
+  return React$1p.createElement.apply(null, createElementArgArray);
 };
 
 (function (_jsx) {
@@ -8523,13 +8536,13 @@ var jsx = function jsx(type, props) {
 var Global = /* #__PURE__ */withEmotionCache(function (props, cache) {
 
   var styles = props.styles;
-  var serialized = serializeStyles([styles], undefined, React$1o.useContext(ThemeContext$1));
+  var serialized = serializeStyles([styles], undefined, React$1p.useContext(ThemeContext$1));
   // but it is based on a constant that will never change at runtime
   // it's effectively like having two implementations and switching them out
   // so it's not actually breaking anything
 
 
-  var sheetRef = React$1o.useRef();
+  var sheetRef = React$1p.useRef();
   useInsertionEffectWithLayoutFallback(function () {
     var key = cache.key + "-global"; // use case of https://github.com/emotion-js/emotion/issues/2675
 
@@ -8619,7 +8632,7 @@ var isPropValid = /* #__PURE__ */memoize$1(function (prop) {
 /* Z+1 */
 );
 
-const React$1n = await importShared('react');
+const React$1o = await importShared('react');
 
 var testOmitPropsOnStringTag = isPropValid;
 
@@ -8715,7 +8728,7 @@ var createStyled$1 = function createStyled(tag, options) {
           mergedProps[key] = props[key];
         }
 
-        mergedProps.theme = React$1n.useContext(ThemeContext$1);
+        mergedProps.theme = React$1o.useContext(ThemeContext$1);
       }
 
       if (typeof props.className === 'string') {
@@ -8748,11 +8761,11 @@ var createStyled$1 = function createStyled(tag, options) {
         newProps.ref = ref;
       }
 
-      return /*#__PURE__*/React$1n.createElement(React$1n.Fragment, null, /*#__PURE__*/React$1n.createElement(Insertion, {
+      return /*#__PURE__*/React$1o.createElement(React$1o.Fragment, null, /*#__PURE__*/React$1o.createElement(Insertion, {
         cache: cache,
         serialized: serialized,
         isStringTag: typeof FinalTag === 'string'
-      }), /*#__PURE__*/React$1n.createElement(FinalTag, newProps));
+      }), /*#__PURE__*/React$1o.createElement(FinalTag, newProps));
     });
     Styled.displayName = identifierName !== undefined ? identifierName : "Styled(" + (typeof baseTag === 'string' ? baseTag : baseTag.displayName || baseTag.name || 'Component') + ")";
     Styled.defaultProps = tag.defaultProps;
@@ -9076,7 +9089,7 @@ function requireReactIs () {
 
 var reactIsExports = /*@__PURE__*/ requireReactIs();
 
-const React$1m = await importShared('react');
+const React$1n = await importShared('react');
 
 // https://github.com/sindresorhus/is-plain-obj/blob/main/index.js
 function isPlainObject$2(item) {
@@ -9087,7 +9100,7 @@ function isPlainObject$2(item) {
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in item) && !(Symbol.iterator in item);
 }
 function deepClone(source) {
-  if (/*#__PURE__*/React$1m.isValidElement(source) || reactIsExports.isValidElementType(source) || !isPlainObject$2(source)) {
+  if (/*#__PURE__*/React$1n.isValidElement(source) || reactIsExports.isValidElementType(source) || !isPlainObject$2(source)) {
     return source;
   }
   const output = {};
@@ -9123,7 +9136,7 @@ function deepmerge(target, source, options = {
   } : target;
   if (isPlainObject$2(target) && isPlainObject$2(source)) {
     Object.keys(source).forEach(key => {
-      if (/*#__PURE__*/React$1m.isValidElement(source[key]) || reactIsExports.isValidElementType(source[key])) {
+      if (/*#__PURE__*/React$1n.isValidElement(source[key]) || reactIsExports.isValidElementType(source[key])) {
         output[key] = source[key];
       } else if (isPlainObject$2(source[key]) &&
       // Avoid prototype pollution
@@ -10340,12 +10353,12 @@ function createTheme$1(options = {}, ...args) {
   return muiTheme;
 }
 
-const React$1l = await importShared('react');
+const React$1m = await importShared('react');
 function isObjectEmpty$2(obj) {
   return Object.keys(obj).length === 0;
 }
 function useTheme$3(defaultTheme = null) {
-  const contextTheme = React$1l.useContext(ThemeContext$1);
+  const contextTheme = React$1m.useContext(ThemeContext$1);
   return !contextTheme || isObjectEmpty$2(contextTheme) ? defaultTheme : contextTheme;
 }
 
@@ -10458,7 +10471,7 @@ const ClassNameGenerator = createClassNameGenerator();
 
 function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e)){var o=e.length;for(t=0;t<o;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);}else for(f in e)e[f]&&(n&&(n+=" "),n+=f);return n}function clsx(){for(var e,t,f=0,n="",o=arguments.length;f<o;f++)(e=arguments[f])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}
 
-const React$1k = await importShared('react');
+const React$1l = await importShared('react');
 function createBox(options = {}) {
   const {
     themeId,
@@ -10469,7 +10482,7 @@ function createBox(options = {}) {
   const BoxRoot = styled$2('div', {
     shouldForwardProp: prop => prop !== 'theme' && prop !== 'sx' && prop !== 'as'
   })(styleFunctionSx);
-  const Box = /*#__PURE__*/React$1k.forwardRef(function Box(inProps, ref) {
+  const Box = /*#__PURE__*/React$1l.forwardRef(function Box(inProps, ref) {
     const theme = useTheme$2(defaultTheme);
     const {
       className,
@@ -10841,7 +10854,7 @@ function useThemeProps({
   });
 }
 
-const React$1j = await importShared('react');
+const React$1k = await importShared('react');
 
 
 /**
@@ -10851,11 +10864,11 @@ const React$1j = await importShared('react');
  * Before you use this hook, make sure to read https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85
  * and confirm it doesn't apply to your use-case.
  */
-const useEnhancedEffect = typeof window !== 'undefined' ? React$1j.useLayoutEffect : React$1j.useEffect;
+const useEnhancedEffect = typeof window !== 'undefined' ? React$1k.useLayoutEffect : React$1k.useEffect;
 
-const React$1i = await importShared('react');
+const React$1j = await importShared('react');
 function useMediaQueryOld(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr) {
-  const [match, setMatch] = React$1i.useState(() => {
+  const [match, setMatch] = React$1j.useState(() => {
     if (noSsr && matchMedia) {
       return matchMedia(query).matches;
     }
@@ -10881,12 +10894,12 @@ function useMediaQueryOld(query, defaultMatches, matchMedia, ssrMatchMedia, noSs
   return match;
 }
 const safeReact$1 = {
-  ...React$1i
+  ...React$1j
 };
 const maybeReactUseSyncExternalStore = safeReact$1.useSyncExternalStore;
 function useMediaQueryNew(query, defaultMatches, matchMedia, ssrMatchMedia, noSsr) {
-  const getDefaultSnapshot = React$1i.useCallback(() => defaultMatches, [defaultMatches]);
-  const getServerSnapshot = React$1i.useMemo(() => {
+  const getDefaultSnapshot = React$1j.useCallback(() => defaultMatches, [defaultMatches]);
+  const getServerSnapshot = React$1j.useMemo(() => {
     if (noSsr && matchMedia) {
       return () => matchMedia(query).matches;
     }
@@ -10898,7 +10911,7 @@ function useMediaQueryNew(query, defaultMatches, matchMedia, ssrMatchMedia, noSs
     }
     return getDefaultSnapshot;
   }, [getDefaultSnapshot, query, ssrMatchMedia, noSsr, matchMedia]);
-  const [getSnapshot, subscribe] = React$1i.useMemo(() => {
+  const [getSnapshot, subscribe] = React$1j.useMemo(() => {
     if (matchMedia === null) {
       return [getDefaultSnapshot, () => () => {
       }];
@@ -11139,20 +11152,20 @@ function private_safeEmphasize(color, coefficient, warning) {
   }
 }
 
+const React$1i = await importShared('react');
+
+const ThemeContext = /* @__PURE__ */ React$1i.createContext(null);
+
 const React$1h = await importShared('react');
-
-const ThemeContext = /* @__PURE__ */ React$1h.createContext(null);
-
-const React$1g = await importShared('react');
 function useTheme$1() {
-  const theme = React$1g.useContext(ThemeContext);
+  const theme = React$1h.useContext(ThemeContext);
   return theme;
 }
 
 const hasSymbol = typeof Symbol === 'function' && Symbol.for;
 const nested = hasSymbol ? Symbol.for('mui.nested') : '__THEME_NESTED__';
 
-const React$1f = await importShared('react');
+const React$1g = await importShared('react');
 function mergeOuterLocalTheme(outerTheme, localTheme) {
   if (typeof localTheme === "function") {
     const mergedTheme = localTheme(outerTheme);
@@ -11169,7 +11182,7 @@ function ThemeProvider$2(props) {
     theme: localTheme
   } = props;
   const outerTheme = useTheme$1();
-  const theme = React$1f.useMemo(() => {
+  const theme = React$1g.useMemo(() => {
     const output = outerTheme === null ? {
       ...localTheme
     } : mergeOuterLocalTheme(outerTheme, localTheme);
@@ -11184,8 +11197,8 @@ function ThemeProvider$2(props) {
   });
 }
 
-const React$1e = await importShared('react');
-const RtlContext = /* @__PURE__ */ React$1e.createContext();
+const React$1f = await importShared('react');
+const RtlContext = /* @__PURE__ */ React$1f.createContext();
 function RtlProvider({
   value,
   ...props
@@ -11196,12 +11209,12 @@ function RtlProvider({
   });
 }
 const useRtl = () => {
-  const value = React$1e.useContext(RtlContext);
+  const value = React$1f.useContext(RtlContext);
   return value ?? false;
 };
 
-const React$1d = await importShared('react');
-const PropsContext = /* @__PURE__ */ React$1d.createContext(void 0);
+const React$1e = await importShared('react');
+const PropsContext = /* @__PURE__ */ React$1e.createContext(void 0);
 function DefaultPropsProvider({
   value,
   children
@@ -11233,7 +11246,7 @@ function useDefaultProps$1({
   props,
   name
 }) {
-  const ctx = React$1d.useContext(PropsContext);
+  const ctx = React$1e.useContext(PropsContext);
   return getThemeProps({
     props,
     name,
@@ -11243,15 +11256,15 @@ function useDefaultProps$1({
   });
 }
 
-const React$1c = await importShared('react');
+const React$1d = await importShared('react');
 
 let globalId = 0;
 
 // TODO React 17: Remove `useGlobalId` once React 17 support is removed
 function useGlobalId(idOverride) {
-  const [defaultId, setDefaultId] = React$1c.useState(idOverride);
+  const [defaultId, setDefaultId] = React$1d.useState(idOverride);
   const id = idOverride || defaultId;
-  React$1c.useEffect(() => {
+  React$1d.useEffect(() => {
     if (defaultId == null) {
       // Fallback to this default id when possible.
       // Use the incrementing value for client-side rendering only.
@@ -11266,7 +11279,7 @@ function useGlobalId(idOverride) {
 
 // See https://github.com/mui/material-ui/issues/41190#issuecomment-2040873379 for why
 const safeReact = {
-  ...React$1c
+  ...React$1d
 };
 const maybeReactUseId = safeReact.useId;
 
@@ -11330,10 +11343,10 @@ function useLayerOrder(theme) {
   });
 }
 
-const React$1b = await importShared('react');
+const React$1c = await importShared('react');
 const EMPTY_THEME = {};
 function useThemeScoping(themeId, upperTheme, localTheme, isPrivate = false) {
-  return React$1b.useMemo(() => {
+  return React$1c.useMemo(() => {
     const resolvedTheme = themeId ? upperTheme[themeId] || upperTheme : upperTheme;
     if (typeof localTheme === "function") {
       const mergedTheme = localTheme(resolvedTheme);
@@ -11534,7 +11547,7 @@ const localStorageManager = ({
   };
 };
 
-const React$1a = await importShared('react');
+const React$1b = await importShared('react');
 function noop$5() {}
 function getSystemMode(mode) {
   if (typeof window !== 'undefined' && typeof window.matchMedia === 'function' && mode === 'system') {
@@ -11580,19 +11593,19 @@ function useCurrentColorScheme(options) {
   } = options;
   const joinedColorSchemes = supportedColorSchemes.join(',');
   const isMultiSchemes = supportedColorSchemes.length > 1;
-  const modeStorage = React$1a.useMemo(() => storageManager?.({
+  const modeStorage = React$1b.useMemo(() => storageManager?.({
     key: modeStorageKey,
     storageWindow
   }), [storageManager, modeStorageKey, storageWindow]);
-  const lightStorage = React$1a.useMemo(() => storageManager?.({
+  const lightStorage = React$1b.useMemo(() => storageManager?.({
     key: `${colorSchemeStorageKey}-light`,
     storageWindow
   }), [storageManager, colorSchemeStorageKey, storageWindow]);
-  const darkStorage = React$1a.useMemo(() => storageManager?.({
+  const darkStorage = React$1b.useMemo(() => storageManager?.({
     key: `${colorSchemeStorageKey}-dark`,
     storageWindow
   }), [storageManager, colorSchemeStorageKey, storageWindow]);
-  const [state, setState] = React$1a.useState(() => {
+  const [state, setState] = React$1b.useState(() => {
     const initialMode = modeStorage?.get(defaultMode) || defaultMode;
     const lightColorScheme = lightStorage?.get(defaultLightColorScheme) || defaultLightColorScheme;
     const darkColorScheme = darkStorage?.get(defaultDarkColorScheme) || defaultDarkColorScheme;
@@ -11603,12 +11616,12 @@ function useCurrentColorScheme(options) {
       darkColorScheme
     };
   });
-  const [isClient, setIsClient] = React$1a.useState(noSsr || !isMultiSchemes);
-  React$1a.useEffect(() => {
+  const [isClient, setIsClient] = React$1b.useState(noSsr || !isMultiSchemes);
+  React$1b.useEffect(() => {
     setIsClient(true); // to rerender the component after hydration
   }, []);
   const colorScheme = getColorScheme(state);
-  const setMode = React$1a.useCallback(mode => {
+  const setMode = React$1b.useCallback(mode => {
     setState(currentState => {
       if (mode === currentState.mode) {
         // do nothing if mode does not change
@@ -11623,7 +11636,7 @@ function useCurrentColorScheme(options) {
       };
     });
   }, [modeStorage, defaultMode]);
-  const setColorScheme = React$1a.useCallback(value => {
+  const setColorScheme = React$1b.useCallback(value => {
     if (!value) {
       setState(currentState => {
         lightStorage?.set(defaultLightColorScheme);
@@ -11682,7 +11695,7 @@ function useCurrentColorScheme(options) {
       });
     }
   }, [joinedColorSchemes, lightStorage, darkStorage, defaultLightColorScheme, defaultDarkColorScheme]);
-  const handleMediaQuery = React$1a.useCallback(event => {
+  const handleMediaQuery = React$1b.useCallback(event => {
     if (state.mode === 'system') {
       setState(currentState => {
         const systemMode = event?.matches ? 'dark' : 'light';
@@ -11700,9 +11713,9 @@ function useCurrentColorScheme(options) {
   }, [state.mode]);
 
   // Ref hack to avoid adding handleMediaQuery as a dep
-  const mediaListener = React$1a.useRef(handleMediaQuery);
+  const mediaListener = React$1b.useRef(handleMediaQuery);
   mediaListener.current = handleMediaQuery;
-  React$1a.useEffect(() => {
+  React$1b.useEffect(() => {
     if (typeof window.matchMedia !== 'function' || !isMultiSchemes) {
       return undefined;
     }
@@ -11720,7 +11733,7 @@ function useCurrentColorScheme(options) {
   }, [isMultiSchemes]);
 
   // Handle when localStorage has changed
-  React$1a.useEffect(() => {
+  React$1b.useEffect(() => {
     if (isMultiSchemes) {
       const unsubscribeMode = modeStorage?.subscribe(value => {
         if (!value || ['light', 'dark', 'system'].includes(value)) {
@@ -11759,7 +11772,7 @@ function useCurrentColorScheme(options) {
   };
 }
 
-const React$19 = await importShared('react');
+const React$1a = await importShared('react');
 const DISABLE_CSS_TRANSITION = "*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}";
 function createCssVarsProvider(options) {
   const {
@@ -11789,8 +11802,8 @@ function createCssVarsProvider(options) {
     },
     systemMode: void 0
   };
-  const ColorSchemeContext = /* @__PURE__ */ React$19.createContext(void 0);
-  const useColorScheme = () => React$19.useContext(ColorSchemeContext) || defaultContext;
+  const ColorSchemeContext = /* @__PURE__ */ React$1a.createContext(void 0);
+  const useColorScheme = () => React$1a.useContext(ColorSchemeContext) || defaultContext;
   const defaultColorSchemes = {};
   const defaultComponents = {};
   function CssVarsProvider(props) {
@@ -11810,11 +11823,11 @@ function createCssVarsProvider(options) {
       forceThemeRerender = false,
       noSsr
     } = props;
-    const hasMounted = React$19.useRef(false);
+    const hasMounted = React$1a.useRef(false);
     const upperTheme = useTheme$1();
-    const ctx = React$19.useContext(ColorSchemeContext);
+    const ctx = React$1a.useContext(ColorSchemeContext);
     const nested = !!ctx && !disableNestedContext;
-    const initialTheme = React$19.useMemo(() => {
+    const initialTheme = React$1a.useMemo(() => {
       if (themeProp) {
         return themeProp;
       }
@@ -11828,7 +11841,7 @@ function createCssVarsProvider(options) {
       cssVarPrefix
     } = restThemeProp;
     const joinedColorSchemes = Object.keys(colorSchemes).filter((k) => !!colorSchemes[k]).join(",");
-    const allColorSchemes = React$19.useMemo(() => joinedColorSchemes.split(","), [joinedColorSchemes]);
+    const allColorSchemes = React$1a.useMemo(() => joinedColorSchemes.split(","), [joinedColorSchemes]);
     const defaultLightColorScheme2 = typeof defaultColorScheme === "string" ? defaultColorScheme : defaultColorScheme.light;
     const defaultDarkColorScheme2 = typeof defaultColorScheme === "string" ? defaultColorScheme : defaultColorScheme.dark;
     const defaultMode = colorSchemes[defaultLightColorScheme2] && colorSchemes[defaultDarkColorScheme2] ? initialMode : colorSchemes[restThemeProp.defaultColorScheme]?.palette?.mode || restThemeProp.palette?.mode;
@@ -11861,7 +11874,7 @@ function createCssVarsProvider(options) {
     if (restThemeProp.vars && !forceThemeRerender) {
       calculatedColorScheme = restThemeProp.defaultColorScheme;
     }
-    const memoTheme = React$19.useMemo(() => {
+    const memoTheme = React$1a.useMemo(() => {
       const themeVars = restThemeProp.generateThemeVars?.() || restThemeProp.vars;
       const theme = {
         ...restThemeProp,
@@ -11923,7 +11936,7 @@ function createCssVarsProvider(options) {
         }
       }
     }, [colorScheme, colorSchemeSelector, colorSchemeNode, allColorSchemes]);
-    React$19.useEffect(() => {
+    React$1a.useEffect(() => {
       let timer;
       if (disableTransitionOnChange && hasMounted.current && documentNode) {
         const css = documentNode.createElement("style");
@@ -11938,13 +11951,13 @@ function createCssVarsProvider(options) {
         clearTimeout(timer);
       };
     }, [colorScheme, disableTransitionOnChange, documentNode]);
-    React$19.useEffect(() => {
+    React$1a.useEffect(() => {
       hasMounted.current = true;
       return () => {
         hasMounted.current = false;
       };
     }, []);
-    const contextValue = React$19.useMemo(() => ({
+    const contextValue = React$1a.useMemo(() => ({
       allColorSchemes,
       colorScheme,
       darkColorScheme,
@@ -11958,7 +11971,7 @@ function createCssVarsProvider(options) {
     if (disableStyleSheetGeneration || restThemeProp.cssVariables === false || nested && upperTheme?.cssVarPrefix === cssVarPrefix) {
       shouldGenerateStyleSheet = false;
     }
-    const element = /* @__PURE__ */ jsxRuntimeExports.jsxs(React$19.Fragment, {
+    const element = /* @__PURE__ */ jsxRuntimeExports.jsxs(React$1a.Fragment, {
       children: [/* @__PURE__ */ jsxRuntimeExports.jsx(ThemeProvider$1, {
         themeId: scopedTheme ? themeId : void 0,
         theme: memoTheme,
@@ -12381,7 +12394,7 @@ function composeClasses(slots, getUtilityClass, classes = undefined) {
   return output;
 }
 
-const React$18 = await importShared('react');
+const React$19 = await importShared('react');
 const defaultTheme$3 = createTheme$1();
 const defaultCreateStyledComponent$1 = styled$1("div", {
   name: "MuiContainer",
@@ -12398,7 +12411,7 @@ const useThemePropsDefault$1 = (inProps) => useThemeProps({
   name: "MuiContainer",
   defaultTheme: defaultTheme$3
 });
-const useUtilityClasses$F = (ownerState, componentName) => {
+const useUtilityClasses$G = (ownerState, componentName) => {
   const getContainerUtilityClass = (slot) => {
     return generateUtilityClass(componentName, slot);
   };
@@ -12470,7 +12483,7 @@ function createContainer(options = {}) {
       }
     }
   }));
-  const Container = /* @__PURE__ */ React$18.forwardRef(function Container2(inProps, ref) {
+  const Container = /* @__PURE__ */ React$19.forwardRef(function Container2(inProps, ref) {
     const props = useThemeProps(inProps);
     const {
       className,
@@ -12488,7 +12501,7 @@ function createContainer(options = {}) {
       fixed,
       maxWidth
     };
-    const classes = useUtilityClasses$F(ownerState, componentName);
+    const classes = useUtilityClasses$G(ownerState, componentName);
     return (
       // @ts-ignore theme is injected by the styled util
       /* @__PURE__ */ jsxRuntimeExports.jsx(ContainerRoot, {
@@ -12503,10 +12516,10 @@ function createContainer(options = {}) {
   return Container;
 }
 
-const React$17 = await importShared('react');
+const React$18 = await importShared('react');
 
 function isMuiElement(element, muiNames) {
-  return /*#__PURE__*/React$17.isValidElement(element) && muiNames.indexOf(
+  return /*#__PURE__*/React$18.isValidElement(element) && muiNames.indexOf(
   // For server components `muiName` is available in element.type._payload.value.muiName
   // relevant info - https://github.com/facebook/react/blob/2807d781a08db8e9873687fccc25c0f12b4fb3d4/packages/react/src/ReactLazy.js#L45
   // eslint-disable-next-line no-underscore-dangle
@@ -12763,7 +12776,7 @@ function deleteLegacyGridProps(props, breakpoints) {
   });
 }
 
-const React$16 = await importShared('react');
+const React$17 = await importShared('react');
 const defaultTheme$2 = createTheme$1();
 const defaultCreateStyledComponent = styled$1("div", {
   name: "MuiGrid",
@@ -12821,7 +12834,7 @@ function createGrid(options = {}) {
     return parsedProp;
   }
   const GridRoot = createStyledComponent(generateGridColumnsStyles, generateGridColumnSpacingStyles, generateGridRowSpacingStyles, generateGridSizeStyles, generateGridDirectionStyles, generateGridStyles, generateGridOffsetStyles);
-  const Grid = /* @__PURE__ */ React$16.forwardRef(function Grid2(inProps, ref) {
+  const Grid = /* @__PURE__ */ React$17.forwardRef(function Grid2(inProps, ref) {
     const theme = useTheme();
     const themeProps = useThemeProps(inProps);
     const props = extendSxProp$1(themeProps);
@@ -12868,9 +12881,9 @@ function createGrid(options = {}) {
       ownerState,
       className: clsx(classes.root, className),
       ...other,
-      children: React$16.Children.map(children, (child) => {
-        if (/* @__PURE__ */ React$16.isValidElement(child) && isMuiElement(child, ["Grid"]) && container && child.props.container) {
-          return /* @__PURE__ */ React$16.cloneElement(child, {
+      children: React$17.Children.map(children, (child) => {
+        if (/* @__PURE__ */ React$17.isValidElement(child) && isMuiElement(child, ["Grid"]) && container && child.props.container) {
+          return /* @__PURE__ */ React$17.cloneElement(child, {
             unstable_level: child.props?.unstable_level ?? level + 1
           });
         }
@@ -14256,12 +14269,12 @@ const {
 });
 const CssVarsProvider = InternalCssVarsProvider;
 
-const React$15 = await importShared('react');
+const React$16 = await importShared('react');
 function ThemeProvider({
   theme,
   ...props
 }) {
-  const noVarsTheme = React$15.useMemo(() => {
+  const noVarsTheme = React$16.useMemo(() => {
     if (typeof theme === 'function') {
       return theme;
     }
@@ -14324,7 +14337,7 @@ function useDefaultProps(params) {
   return useDefaultProps$1(params);
 }
 
-const React$14 = await importShared('react');
+const React$15 = await importShared('react');
 const isDynamicSupport = typeof globalCss({}) === "function";
 const html$3 = (theme, enableColorScheme) => ({
   WebkitFontSmoothing: "antialiased",
@@ -14438,7 +14451,7 @@ function CssBaseline(inProps) {
     children,
     enableColorScheme = false
   } = props;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$14.Fragment, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$15.Fragment, {
     children: [isDynamicSupport && /* @__PURE__ */ jsxRuntimeExports.jsx(GlobalStyles, {
       enableColorScheme
     }), !isDynamicSupport && !enableColorScheme && /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
@@ -14479,8 +14492,8 @@ function getSvgIconUtilityClass(slot) {
 }
 generateUtilityClasses('MuiSvgIcon', ['root', 'colorPrimary', 'colorSecondary', 'colorAction', 'colorError', 'colorDisabled', 'fontSizeInherit', 'fontSizeSmall', 'fontSizeMedium', 'fontSizeLarge']);
 
-const React$13 = await importShared('react');
-const useUtilityClasses$E = (ownerState) => {
+const React$14 = await importShared('react');
+const useUtilityClasses$F = (ownerState) => {
   const {
     color,
     fontSize,
@@ -14587,7 +14600,7 @@ const SvgIconRoot = styled("svg", {
     }
   ]
 })));
-const SvgIcon = /* @__PURE__ */ React$13.forwardRef(function SvgIcon2(inProps, ref) {
+const SvgIcon = /* @__PURE__ */ React$14.forwardRef(function SvgIcon2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiSvgIcon"
@@ -14604,7 +14617,7 @@ const SvgIcon = /* @__PURE__ */ React$13.forwardRef(function SvgIcon2(inProps, r
     viewBox = "0 0 24 24",
     ...other
   } = props;
-  const hasSvgAsChild = /* @__PURE__ */ React$13.isValidElement(children) && children.type === "svg";
+  const hasSvgAsChild = /* @__PURE__ */ React$14.isValidElement(children) && children.type === "svg";
   const ownerState = {
     ...props,
     color,
@@ -14619,7 +14632,7 @@ const SvgIcon = /* @__PURE__ */ React$13.forwardRef(function SvgIcon2(inProps, r
   if (!inheritViewBox) {
     more.viewBox = viewBox;
   }
-  const classes = useUtilityClasses$E(ownerState);
+  const classes = useUtilityClasses$F(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(SvgIconRoot, {
     as: component,
     className: clsx(classes.root, className),
@@ -14639,7 +14652,7 @@ const SvgIcon = /* @__PURE__ */ React$13.forwardRef(function SvgIcon2(inProps, r
 });
 SvgIcon.muiName = "SvgIcon";
 
-const React$12 = await importShared('react');
+const React$13 = await importShared('react');
 function createSvgIcon(path, displayName) {
   function Component(props, ref) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(SvgIcon, {
@@ -14650,7 +14663,7 @@ function createSvgIcon(path, displayName) {
     });
   }
   Component.muiName = SvgIcon.muiName;
-  return /* @__PURE__ */ React$12.memo(/* @__PURE__ */ React$12.forwardRef(Component));
+  return /* @__PURE__ */ React$13.memo(/* @__PURE__ */ React$13.forwardRef(Component));
 }
 
 // Corresponds to 10 frames at 60 Hz.
@@ -14701,7 +14714,7 @@ function setRef(ref, value) {
   }
 }
 
-const React$11 = await importShared('react');
+const React$12 = await importShared('react');
 
 function useControlled(props) {
   const {
@@ -14712,10 +14725,10 @@ function useControlled(props) {
   } = props;
   const {
     current: isControlled
-  } = React$11.useRef(controlled !== void 0);
-  const [valueState, setValue] = React$11.useState(defaultProp);
+  } = React$12.useRef(controlled !== void 0);
+  const [valueState, setValue] = React$12.useState(defaultProp);
   const value = isControlled ? controlled : valueState;
-  const setValueIfUncontrolled = React$11.useCallback((newValue) => {
+  const setValueIfUncontrolled = React$12.useCallback((newValue) => {
     if (!isControlled) {
       setValue(newValue);
     }
@@ -14723,7 +14736,7 @@ function useControlled(props) {
   return [value, setValueIfUncontrolled];
 }
 
-const React$10 = await importShared('react');
+const React$11 = await importShared('react');
 
 /**
  * Inspired by https://github.com/facebook/react/issues/14099#issuecomment-440013892
@@ -14731,16 +14744,16 @@ const React$10 = await importShared('react');
  */
 
 function useEventCallback(fn) {
-  const ref = React$10.useRef(fn);
+  const ref = React$11.useRef(fn);
   useEnhancedEffect(() => {
     ref.current = fn;
   });
-  return React$10.useRef((...args) =>
+  return React$11.useRef((...args) =>
   // @ts-expect-error hide `this`
   (0, ref.current)(...args)).current;
 }
 
-const React$$ = await importShared('react');
+const React$10 = await importShared('react');
 
 
 /**
@@ -14759,8 +14772,8 @@ const React$$ = await importShared('react');
  * @returns {React.RefCallback<Instance> | null} The new ref callback.
  */
 function useForkRef(...refs) {
-  const cleanupRef = React$$.useRef(undefined);
-  const refEffect = React$$.useCallback(instance => {
+  const cleanupRef = React$10.useRef(undefined);
+  const refEffect = React$10.useCallback(instance => {
     const cleanups = refs.map(ref => {
       if (ref == null) {
         return null;
@@ -14782,7 +14795,7 @@ function useForkRef(...refs) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, refs);
-  return React$$.useMemo(() => {
+  return React$10.useMemo(() => {
     if (refs.every(ref => ref == null)) {
       return null;
     }
@@ -14898,15 +14911,15 @@ const config = {
   disabled: false
 };
 
-const React$_ = await importShared('react');
+const React$$ = await importShared('react');
 
-const TransitionGroupContext = React$_.createContext(null);
+const TransitionGroupContext = React$$.createContext(null);
 
 var forceReflow = function forceReflow(node) {
   return node.scrollTop;
 };
 
-const React$Z = await importShared('react');
+const React$_ = await importShared('react');
 
 const ReactDOM$1 = await importShared('react-dom');
 var UNMOUNTED = "unmounted";
@@ -15116,13 +15129,13 @@ var Transition$1 = /* @__PURE__ */ (function(_React$Component) {
     var _this$props = this.props, children = _this$props.children; _this$props.in; _this$props.mountOnEnter; _this$props.unmountOnExit; _this$props.appear; _this$props.enter; _this$props.exit; _this$props.timeout; _this$props.addEndListener; _this$props.onEnter; _this$props.onEntering; _this$props.onEntered; _this$props.onExit; _this$props.onExiting; _this$props.onExited; _this$props.nodeRef; var childProps = _objectWithoutPropertiesLoose$1(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
     return (
       // allows for nested Transitions
-      /* @__PURE__ */ React$Z.createElement(TransitionGroupContext.Provider, {
+      /* @__PURE__ */ React$_.createElement(TransitionGroupContext.Provider, {
         value: null
-      }, typeof children === "function" ? children(status, childProps) : React$Z.cloneElement(React$Z.Children.only(children), childProps))
+      }, typeof children === "function" ? children(status, childProps) : React$_.cloneElement(React$_.Children.only(children), childProps))
     );
   };
   return Transition2;
-})(React$Z.Component);
+})(React$_.Component);
 Transition$1.contextType = TransitionGroupContext;
 Transition$1.propTypes = {};
 function noop$4() {
@@ -15294,7 +15307,7 @@ function getNextChildMapping(nextProps, prevChildMapping, onExited) {
   return children;
 }
 
-const React$Y = await importShared('react');
+const React$Z = await importShared('react');
 var values = Object.values || function(obj) {
   return Object.keys(obj).map(function(k) {
     return obj[k];
@@ -15364,20 +15377,20 @@ var TransitionGroup = /* @__PURE__ */ (function(_React$Component) {
     delete props.enter;
     delete props.exit;
     if (Component === null) {
-      return /* @__PURE__ */ React$Y.createElement(TransitionGroupContext.Provider, {
+      return /* @__PURE__ */ React$Z.createElement(TransitionGroupContext.Provider, {
         value: contextValue
       }, children);
     }
-    return /* @__PURE__ */ React$Y.createElement(TransitionGroupContext.Provider, {
+    return /* @__PURE__ */ React$Z.createElement(TransitionGroupContext.Provider, {
       value: contextValue
-    }, /* @__PURE__ */ React$Y.createElement(Component, props, children));
+    }, /* @__PURE__ */ React$Z.createElement(Component, props, children));
   };
   return TransitionGroup2;
-})(React$Y.Component);
+})(React$Z.Component);
 TransitionGroup.propTypes = {};
 TransitionGroup.defaultProps = defaultProps;
 
-const React$X = await importShared('react');
+const React$Y = await importShared('react');
 
 const UNINITIALIZED = {};
 
@@ -15389,14 +15402,14 @@ const UNINITIALIZED = {};
  *   const ref = useLazyRef(sortColumns, columns)
  */
 function useLazyRef(init, initArg) {
-  const ref = React$X.useRef(UNINITIALIZED);
+  const ref = React$Y.useRef(UNINITIALIZED);
   if (ref.current === UNINITIALIZED) {
     ref.current = init(initArg);
   }
   return ref;
 }
 
-const React$W = await importShared('react');
+const React$X = await importShared('react');
 
 const EMPTY$1 = [];
 
@@ -15406,7 +15419,7 @@ const EMPTY$1 = [];
 function useOnMount(fn) {
   // TODO: uncomment once we enable eslint-plugin-react-compiler // eslint-disable-next-line react-compiler/react-compiler -- no need to put `fn` in the dependency array
   /* eslint-disable react-hooks/exhaustive-deps */
-  React$W.useEffect(fn, EMPTY$1);
+  React$X.useEffect(fn, EMPTY$1);
   /* eslint-enable react-hooks/exhaustive-deps */
 }
 
@@ -15703,8 +15716,8 @@ function getPaperUtilityClass(slot) {
 }
 generateUtilityClasses('MuiPaper', ['root', 'rounded', 'outlined', 'elevation', 'elevation0', 'elevation1', 'elevation2', 'elevation3', 'elevation4', 'elevation5', 'elevation6', 'elevation7', 'elevation8', 'elevation9', 'elevation10', 'elevation11', 'elevation12', 'elevation13', 'elevation14', 'elevation15', 'elevation16', 'elevation17', 'elevation18', 'elevation19', 'elevation20', 'elevation21', 'elevation22', 'elevation23', 'elevation24']);
 
-const React$V = await importShared('react');
-const useUtilityClasses$D = (ownerState) => {
+const React$W = await importShared('react');
+const useUtilityClasses$E = (ownerState) => {
   const {
     square,
     elevation,
@@ -15755,7 +15768,7 @@ const PaperRoot = styled("div", {
     }
   }]
 })));
-const Paper = /* @__PURE__ */ React$V.forwardRef(function Paper2(inProps, ref) {
+const Paper = /* @__PURE__ */ React$W.forwardRef(function Paper2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiPaper"
@@ -15776,7 +15789,7 @@ const Paper = /* @__PURE__ */ React$V.forwardRef(function Paper2(inProps, ref) {
     square,
     variant
   };
-  const classes = useUtilityClasses$D(ownerState);
+  const classes = useUtilityClasses$E(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(PaperRoot, {
     as: component,
     ownerState,
@@ -15806,7 +15819,7 @@ function isFocusVisible(element) {
   return false;
 }
 
-const React$U = await importShared('react');
+const React$V = await importShared('react');
 /**
  * Lazy initialization container for the Ripple instance. This improves
  * performance by delaying mounting the ripple until it's needed.
@@ -15828,10 +15841,10 @@ class LazyRipple {
   static use() {
     /* eslint-disable */
     const ripple = useLazyRef(LazyRipple.create).current;
-    const [shouldMount, setShouldMount] = React$U.useState(false);
+    const [shouldMount, setShouldMount] = React$V.useState(false);
     ripple.shouldMount = shouldMount;
     ripple.setShouldMount = setShouldMount;
-    React$U.useEffect(ripple.mountEffect, [shouldMount]);
+    React$V.useEffect(ripple.mountEffect, [shouldMount]);
     /* eslint-enable */
 
     return ripple;
@@ -15889,7 +15902,7 @@ function createControlledPromise() {
   return p;
 }
 
-const React$T = await importShared('react');
+const React$U = await importShared('react');
 function Ripple(props) {
   const {
     className,
@@ -15902,7 +15915,7 @@ function Ripple(props) {
     onExited,
     timeout
   } = props;
-  const [leaving, setLeaving] = React$T.useState(false);
+  const [leaving, setLeaving] = React$U.useState(false);
   const rippleClassName = clsx(className, classes.ripple, classes.rippleVisible, pulsate && classes.ripplePulsate);
   const rippleStyles = {
     width: rippleSize,
@@ -15914,7 +15927,7 @@ function Ripple(props) {
   if (!inProp && !leaving) {
     setLeaving(true);
   }
-  React$T.useEffect(() => {
+  React$U.useEffect(() => {
     if (!inProp && onExited != null) {
       const timeoutId = setTimeout(onExited, timeout);
       return () => {
@@ -15934,7 +15947,7 @@ function Ripple(props) {
 
 const touchRippleClasses = generateUtilityClasses('MuiTouchRipple', ['root', 'ripple', 'rippleVisible', 'ripplePulsate', 'child', 'childLeaving', 'childPulsate']);
 
-const React$S = await importShared('react');
+const React$T = await importShared('react');
 const DURATION = 550;
 const DELAY_RIPPLE = 80;
 const enterKeyframe = keyframes`
@@ -16039,7 +16052,7 @@ const TouchRippleRipple = styled(Ripple, {
     animation-delay: 200ms;
   }
 `;
-const TouchRipple = /* @__PURE__ */ React$S.forwardRef(function TouchRipple2(inProps, ref) {
+const TouchRipple = /* @__PURE__ */ React$T.forwardRef(function TouchRipple2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiTouchRipple"
@@ -16050,20 +16063,20 @@ const TouchRipple = /* @__PURE__ */ React$S.forwardRef(function TouchRipple2(inP
     className,
     ...other
   } = props;
-  const [ripples, setRipples] = React$S.useState([]);
-  const nextKey = React$S.useRef(0);
-  const rippleCallback = React$S.useRef(null);
-  React$S.useEffect(() => {
+  const [ripples, setRipples] = React$T.useState([]);
+  const nextKey = React$T.useRef(0);
+  const rippleCallback = React$T.useRef(null);
+  React$T.useEffect(() => {
     if (rippleCallback.current) {
       rippleCallback.current();
       rippleCallback.current = null;
     }
   }, [ripples]);
-  const ignoringMouseDown = React$S.useRef(false);
+  const ignoringMouseDown = React$T.useRef(false);
   const startTimer = useTimeout();
-  const startTimerCommit = React$S.useRef(null);
-  const container = React$S.useRef(null);
-  const startCommit = React$S.useCallback((params) => {
+  const startTimerCommit = React$T.useRef(null);
+  const container = React$T.useRef(null);
+  const startCommit = React$T.useCallback((params) => {
     const {
       pulsate: pulsate2,
       rippleX,
@@ -16089,7 +16102,7 @@ const TouchRipple = /* @__PURE__ */ React$S.forwardRef(function TouchRipple2(inP
     nextKey.current += 1;
     rippleCallback.current = cb;
   }, [classes]);
-  const start = React$S.useCallback((event = {}, options = {}, cb = () => {
+  const start = React$T.useCallback((event = {}, options = {}, cb = () => {
   }) => {
     const {
       pulsate: pulsate2 = false,
@@ -16163,12 +16176,12 @@ const TouchRipple = /* @__PURE__ */ React$S.forwardRef(function TouchRipple2(inP
       });
     }
   }, [centerProp, startCommit, startTimer]);
-  const pulsate = React$S.useCallback(() => {
+  const pulsate = React$T.useCallback(() => {
     start({}, {
       pulsate: true
     });
   }, [start]);
-  const stop = React$S.useCallback((event, cb) => {
+  const stop = React$T.useCallback((event, cb) => {
     startTimer.clear();
     if (event?.type === "touchend" && startTimerCommit.current) {
       startTimerCommit.current();
@@ -16187,7 +16200,7 @@ const TouchRipple = /* @__PURE__ */ React$S.forwardRef(function TouchRipple2(inP
     });
     rippleCallback.current = cb;
   }, [startTimer]);
-  React$S.useImperativeHandle(ref, () => ({
+  React$T.useImperativeHandle(ref, () => ({
     pulsate,
     start,
     stop
@@ -16209,8 +16222,8 @@ function getButtonBaseUtilityClass(slot) {
 }
 const buttonBaseClasses = generateUtilityClasses('MuiButtonBase', ['root', 'disabled', 'focusVisible']);
 
-const React$R = await importShared('react');
-const useUtilityClasses$C = (ownerState) => {
+const React$S = await importShared('react');
+const useUtilityClasses$D = (ownerState) => {
   const {
     disabled,
     focusVisible,
@@ -16269,7 +16282,7 @@ const ButtonBaseRoot = styled("button", {
     colorAdjust: "exact"
   }
 });
-const ButtonBase = /* @__PURE__ */ React$R.forwardRef(function ButtonBase2(inProps, ref) {
+const ButtonBase = /* @__PURE__ */ React$S.forwardRef(function ButtonBase2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiButtonBase"
@@ -16306,21 +16319,21 @@ const ButtonBase = /* @__PURE__ */ React$R.forwardRef(function ButtonBase2(inPro
     type,
     ...other
   } = props;
-  const buttonRef = React$R.useRef(null);
+  const buttonRef = React$S.useRef(null);
   const ripple = useLazyRipple();
   const handleRippleRef = useForkRef(ripple.ref, touchRippleRef);
-  const [focusVisible, setFocusVisible] = React$R.useState(false);
+  const [focusVisible, setFocusVisible] = React$S.useState(false);
   if (disabled && focusVisible) {
     setFocusVisible(false);
   }
-  React$R.useImperativeHandle(action, () => ({
+  React$S.useImperativeHandle(action, () => ({
     focusVisible: () => {
       setFocusVisible(true);
       buttonRef.current.focus();
     }
   }), []);
   const enableTouchRipple = ripple.shouldMount && !disableRipple && !disabled;
-  React$R.useEffect(() => {
+  React$S.useEffect(() => {
     if (focusVisible && focusRipple && !disableRipple) {
       ripple.pulsate();
     }
@@ -16427,7 +16440,7 @@ const ButtonBase = /* @__PURE__ */ React$R.forwardRef(function ButtonBase2(inPro
     tabIndex,
     focusVisible
   };
-  const classes = useUtilityClasses$C(ownerState);
+  const classes = useUtilityClasses$D(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(ButtonBaseRoot, {
     as: ComponentProp,
     className: clsx(classes.root, className),
@@ -16521,7 +16534,7 @@ function getCircularProgressUtilityClass(slot) {
 }
 generateUtilityClasses('MuiCircularProgress', ['root', 'determinate', 'indeterminate', 'colorPrimary', 'colorSecondary', 'svg', 'track', 'circle', 'circleDeterminate', 'circleIndeterminate', 'circleDisableShrink']);
 
-const React$Q = await importShared('react');
+const React$R = await importShared('react');
 const SIZE = 44;
 const circularRotateKeyframe = keyframes`
   0% {
@@ -16554,7 +16567,7 @@ const rotateAnimation = typeof circularRotateKeyframe !== "string" ? css`
 const dashAnimation = typeof circularDashKeyframe !== "string" ? css`
         animation: ${circularDashKeyframe} 1.4s ease-in-out infinite;
       ` : null;
-const useUtilityClasses$B = (ownerState) => {
+const useUtilityClasses$C = (ownerState) => {
   const {
     classes,
     variant,
@@ -16661,7 +16674,7 @@ const CircularProgressTrack = styled("circle", {
   stroke: "currentColor",
   opacity: (theme.vars || theme).palette.action.activatedOpacity
 })));
-const CircularProgress = /* @__PURE__ */ React$Q.forwardRef(function CircularProgress2(inProps, ref) {
+const CircularProgress = /* @__PURE__ */ React$R.forwardRef(function CircularProgress2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiCircularProgress"
@@ -16688,7 +16701,7 @@ const CircularProgress = /* @__PURE__ */ React$Q.forwardRef(function CircularPro
     variant,
     enableTrackSlot
   };
-  const classes = useUtilityClasses$B(ownerState);
+  const classes = useUtilityClasses$C(ownerState);
   const circleStyle = {};
   const rootStyle = {};
   const rootProps = {};
@@ -16744,8 +16757,8 @@ function getIconButtonUtilityClass(slot) {
 }
 const iconButtonClasses = generateUtilityClasses('MuiIconButton', ['root', 'disabled', 'colorInherit', 'colorPrimary', 'colorSecondary', 'colorError', 'colorInfo', 'colorSuccess', 'colorWarning', 'edgeStart', 'edgeEnd', 'sizeSmall', 'sizeMedium', 'sizeLarge', 'loading', 'loadingIndicator', 'loadingWrapper']);
 
-const React$P = await importShared('react');
-const useUtilityClasses$A = (ownerState) => {
+const React$Q = await importShared('react');
+const useUtilityClasses$B = (ownerState) => {
   const {
     classes,
     disabled,
@@ -16896,7 +16909,7 @@ const IconButtonLoadingIndicator = styled("span", {
     }
   }]
 }));
-const IconButton = /* @__PURE__ */ React$P.forwardRef(function IconButton2(inProps, ref) {
+const IconButton = /* @__PURE__ */ React$Q.forwardRef(function IconButton2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiIconButton"
@@ -16930,7 +16943,7 @@ const IconButton = /* @__PURE__ */ React$P.forwardRef(function IconButton2(inPro
     loadingIndicator,
     size
   };
-  const classes = useUtilityClasses$A(ownerState);
+  const classes = useUtilityClasses$B(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(IconButtonRoot, {
     id: loading ? loadingId : idProp,
     className: clsx(classes.root, className),
@@ -16975,8 +16988,8 @@ const ClearIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
   d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
 }));
 
-const React$O = await importShared('react');
-const useUtilityClasses$z = (ownerState) => {
+const React$P = await importShared('react');
+const useUtilityClasses$A = (ownerState) => {
   const {
     variant,
     color,
@@ -17098,7 +17111,7 @@ const defaultIconMapping = {
     fontSize: "inherit"
   })
 };
-const Alert = /* @__PURE__ */ React$O.forwardRef(function Alert2(inProps, ref) {
+const Alert = /* @__PURE__ */ React$P.forwardRef(function Alert2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiAlert"
@@ -17128,7 +17141,7 @@ const Alert = /* @__PURE__ */ React$O.forwardRef(function Alert2(inProps, ref) {
     variant,
     colorSeverity: color || severity
   };
-  const classes = useUtilityClasses$z(ownerState);
+  const classes = useUtilityClasses$A(ownerState);
   const externalForwardedProps = {
     slots: {
       closeButton: components.CloseButton,
@@ -17217,7 +17230,7 @@ function getTypographyUtilityClass(slot) {
 }
 const typographyClasses = generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
 
-const React$N = await importShared('react');
+const React$O = await importShared('react');
 const v6Colors = {
   primary: true,
   secondary: true,
@@ -17230,7 +17243,7 @@ const v6Colors = {
   textDisabled: true
 };
 const extendSxProp = internal_createExtendSxProp();
-const useUtilityClasses$y = (ownerState) => {
+const useUtilityClasses$z = (ownerState) => {
   const {
     align,
     gutterBottom,
@@ -17331,7 +17344,7 @@ const defaultVariantMapping = {
   body2: "p",
   inherit: "p"
 };
-const Typography = /* @__PURE__ */ React$N.forwardRef(function Typography2(inProps, ref) {
+const Typography = /* @__PURE__ */ React$O.forwardRef(function Typography2(inProps, ref) {
   const {
     color,
     ...themeProps
@@ -17370,7 +17383,7 @@ const Typography = /* @__PURE__ */ React$N.forwardRef(function Typography2(inPro
     variantMapping
   };
   const Component = component || (paragraph ? "p" : variantMapping[variant] || defaultVariantMapping[variant]) || "span";
-  const classes = useUtilityClasses$y(ownerState);
+  const classes = useUtilityClasses$z(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(TypographyRoot, {
     as: Component,
     ref,
@@ -17391,8 +17404,8 @@ function getAppBarUtilityClass(slot) {
 }
 generateUtilityClasses('MuiAppBar', ['root', 'positionFixed', 'positionAbsolute', 'positionSticky', 'positionStatic', 'positionRelative', 'colorDefault', 'colorPrimary', 'colorSecondary', 'colorInherit', 'colorTransparent', 'colorError', 'colorInfo', 'colorSuccess', 'colorWarning']);
 
-const React$M = await importShared('react');
-const useUtilityClasses$x = (ownerState) => {
+const React$N = await importShared('react');
+const useUtilityClasses$y = (ownerState) => {
   const {
     color,
     position,
@@ -17532,7 +17545,7 @@ const AppBarRoot = styled(Paper, {
     }
   }]
 })));
-const AppBar = /* @__PURE__ */ React$M.forwardRef(function AppBar2(inProps, ref) {
+const AppBar = /* @__PURE__ */ React$N.forwardRef(function AppBar2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiAppBar"
@@ -17550,7 +17563,7 @@ const AppBar = /* @__PURE__ */ React$M.forwardRef(function AppBar2(inProps, ref)
     position,
     enableColorOnDark
   };
-  const classes = useUtilityClasses$x(ownerState);
+  const classes = useUtilityClasses$y(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(AppBarRoot, {
     square: true,
     component: "header",
@@ -19383,7 +19396,7 @@ function useSlotProps(parameters) {
   return props;
 }
 
-const React$L = await importShared('react');
+const React$M = await importShared('react');
 
 
 /**
@@ -19395,7 +19408,7 @@ const React$L = await importShared('react');
  */
 function getReactElementRef(element) {
   // 'ref' is passed as prop in React 19, whereas 'ref' is directly attached to children in older versions
-  if (parseInt(React$L.version, 10) >= 19) {
+  if (parseInt(React$M.version, 10) >= 19) {
     return element?.props?.ref || null;
   }
   // @ts-expect-error element.ref is not included in the ReactElement type
@@ -19403,20 +19416,20 @@ function getReactElementRef(element) {
   return element?.ref || null;
 }
 
-const React$K = await importShared('react');
+const React$L = await importShared('react');
 
 const ReactDOM = await importShared('react-dom');
 function getContainer$1(container) {
   return typeof container === "function" ? container() : container;
 }
-const Portal = /* @__PURE__ */ React$K.forwardRef(function Portal2(props, forwardedRef) {
+const Portal = /* @__PURE__ */ React$L.forwardRef(function Portal2(props, forwardedRef) {
   const {
     children,
     container,
     disablePortal = false
   } = props;
-  const [mountNode, setMountNode] = React$K.useState(null);
-  const handleRef = useForkRef(/* @__PURE__ */ React$K.isValidElement(children) ? getReactElementRef(children) : null, forwardedRef);
+  const [mountNode, setMountNode] = React$L.useState(null);
+  const handleRef = useForkRef(/* @__PURE__ */ React$L.isValidElement(children) ? getReactElementRef(children) : null, forwardedRef);
   useEnhancedEffect(() => {
     if (!disablePortal) {
       setMountNode(getContainer$1(container) || document.body);
@@ -19432,11 +19445,11 @@ const Portal = /* @__PURE__ */ React$K.forwardRef(function Portal2(props, forwar
     return void 0;
   }, [forwardedRef, mountNode, disablePortal]);
   if (disablePortal) {
-    if (/* @__PURE__ */ React$K.isValidElement(children)) {
+    if (/* @__PURE__ */ React$L.isValidElement(children)) {
       const newProps = {
         ref: handleRef
       };
-      return /* @__PURE__ */ React$K.cloneElement(children, newProps);
+      return /* @__PURE__ */ React$L.cloneElement(children, newProps);
     }
     return children;
   }
@@ -19448,7 +19461,7 @@ function getPopperUtilityClass(slot) {
 }
 generateUtilityClasses('MuiPopper', ['root']);
 
-const React$J = await importShared('react');
+const React$K = await importShared('react');
 function flipPlacement(placement, direction) {
   if (direction === "ltr") {
     return placement;
@@ -19472,7 +19485,7 @@ function resolveAnchorEl$1(anchorEl) {
 function isHTMLElement(element) {
   return element.nodeType !== void 0;
 }
-const useUtilityClasses$w = (ownerState) => {
+const useUtilityClasses$x = (ownerState) => {
   const {
     classes
   } = ownerState;
@@ -19482,7 +19495,7 @@ const useUtilityClasses$w = (ownerState) => {
   return composeClasses(slots, getPopperUtilityClass, classes);
 };
 const defaultPopperOptions = {};
-const PopperTooltip = /* @__PURE__ */ React$J.forwardRef(function PopperTooltip2(props, forwardedRef) {
+const PopperTooltip = /* @__PURE__ */ React$K.forwardRef(function PopperTooltip2(props, forwardedRef) {
   const {
     anchorEl,
     children,
@@ -19501,24 +19514,24 @@ const PopperTooltip = /* @__PURE__ */ React$J.forwardRef(function PopperTooltip2
     // prevent from spreading to DOM, it can come from the parent component e.g. Select.
     ...other
   } = props;
-  const tooltipRef = React$J.useRef(null);
+  const tooltipRef = React$K.useRef(null);
   const ownRef = useForkRef(tooltipRef, forwardedRef);
-  const popperRef = React$J.useRef(null);
+  const popperRef = React$K.useRef(null);
   const handlePopperRef = useForkRef(popperRef, popperRefProp);
-  const handlePopperRefRef = React$J.useRef(handlePopperRef);
+  const handlePopperRefRef = React$K.useRef(handlePopperRef);
   useEnhancedEffect(() => {
     handlePopperRefRef.current = handlePopperRef;
   }, [handlePopperRef]);
-  React$J.useImperativeHandle(popperRefProp, () => popperRef.current, []);
+  React$K.useImperativeHandle(popperRefProp, () => popperRef.current, []);
   const rtlPlacement = flipPlacement(initialPlacement, direction);
-  const [placement, setPlacement] = React$J.useState(rtlPlacement);
-  const [resolvedAnchorElement, setResolvedAnchorElement] = React$J.useState(resolveAnchorEl$1(anchorEl));
-  React$J.useEffect(() => {
+  const [placement, setPlacement] = React$K.useState(rtlPlacement);
+  const [resolvedAnchorElement, setResolvedAnchorElement] = React$K.useState(resolveAnchorEl$1(anchorEl));
+  React$K.useEffect(() => {
     if (popperRef.current) {
       popperRef.current.forceUpdate();
     }
   });
-  React$J.useEffect(() => {
+  React$K.useEffect(() => {
     if (anchorEl) {
       setResolvedAnchorElement(resolveAnchorEl$1(anchorEl));
     }
@@ -19573,7 +19586,7 @@ const PopperTooltip = /* @__PURE__ */ React$J.forwardRef(function PopperTooltip2
   if (TransitionProps !== null) {
     childProps.TransitionProps = TransitionProps;
   }
-  const classes = useUtilityClasses$w(props);
+  const classes = useUtilityClasses$x(props);
   const Root = slots.root ?? "div";
   const rootProps = useSlotProps({
     elementType: Root,
@@ -19591,7 +19604,7 @@ const PopperTooltip = /* @__PURE__ */ React$J.forwardRef(function PopperTooltip2
     children: typeof children === "function" ? children(childProps) : children
   });
 });
-const Popper$1 = /* @__PURE__ */ React$J.forwardRef(function Popper2(props, forwardedRef) {
+const Popper$1 = /* @__PURE__ */ React$K.forwardRef(function Popper2(props, forwardedRef) {
   const {
     anchorEl,
     children,
@@ -19610,7 +19623,7 @@ const Popper$1 = /* @__PURE__ */ React$J.forwardRef(function Popper2(props, forw
     slots = {},
     ...other
   } = props;
-  const [exited, setExited] = React$J.useState(true);
+  const [exited, setExited] = React$K.useState(true);
   const handleEnter = () => {
     setExited(false);
   };
@@ -19664,12 +19677,12 @@ const Popper$1 = /* @__PURE__ */ React$J.forwardRef(function Popper2(props, forw
   });
 });
 
-const React$I = await importShared('react');
+const React$J = await importShared('react');
 const PopperRoot = styled(Popper$1, {
   name: "MuiPopper",
   slot: "Root"
 })({});
-const Popper = /* @__PURE__ */ React$I.forwardRef(function Popper2(inProps, ref) {
+const Popper = /* @__PURE__ */ React$J.forwardRef(function Popper2(inProps, ref) {
   const isRtl = useRtl();
   const props = useDefaultProps({
     props: inProps,
@@ -19719,7 +19732,7 @@ const Popper = /* @__PURE__ */ React$I.forwardRef(function Popper2(inProps, ref)
   });
 });
 
-const React$H = await importShared('react');
+const React$I = await importShared('react');
 function getStyleValue(value) {
   return parseInt(value, 10) || 0;
 }
@@ -19747,7 +19760,7 @@ function isObjectEmpty(object) {
 function isEmpty$1(obj) {
   return isObjectEmpty(obj) || obj.outerHeightStyle === 0 && !obj.overflowing;
 }
-const TextareaAutosize = /* @__PURE__ */ React$H.forwardRef(function TextareaAutosize2(props, forwardedRef) {
+const TextareaAutosize = /* @__PURE__ */ React$I.forwardRef(function TextareaAutosize2(props, forwardedRef) {
   const {
     onChange,
     maxRows,
@@ -19758,12 +19771,12 @@ const TextareaAutosize = /* @__PURE__ */ React$H.forwardRef(function TextareaAut
   } = props;
   const {
     current: isControlled
-  } = React$H.useRef(value != null);
-  const textareaRef = React$H.useRef(null);
+  } = React$I.useRef(value != null);
+  const textareaRef = React$I.useRef(null);
   const handleRef = useForkRef(forwardedRef, textareaRef);
-  const heightRef = React$H.useRef(null);
-  const hiddenTextareaRef = React$H.useRef(null);
-  const calculateTextareaStyles = React$H.useCallback(() => {
+  const heightRef = React$I.useRef(null);
+  const hiddenTextareaRef = React$I.useRef(null);
+  const calculateTextareaStyles = React$I.useCallback(() => {
     const textarea = textareaRef.current;
     const hiddenTextarea = hiddenTextareaRef.current;
     if (!textarea || !hiddenTextarea) {
@@ -19812,7 +19825,7 @@ const TextareaAutosize = /* @__PURE__ */ React$H.forwardRef(function TextareaAut
     const outerHeightStyle = textareaStyles.outerHeightStyle;
     return heightRef.current != null && heightRef.current !== outerHeightStyle;
   });
-  const syncHeight = React$H.useCallback(() => {
+  const syncHeight = React$I.useCallback(() => {
     const textarea = textareaRef.current;
     const textareaStyles = calculateTextareaStyles();
     if (!textarea || !textareaStyles || isEmpty$1(textareaStyles)) {
@@ -19825,7 +19838,7 @@ const TextareaAutosize = /* @__PURE__ */ React$H.forwardRef(function TextareaAut
     }
     textarea.style.overflow = textareaStyles.overflowing ? "hidden" : "";
   }, [calculateTextareaStyles]);
-  const frameRef = React$H.useRef(-1);
+  const frameRef = React$I.useRef(-1);
   useEnhancedEffect(() => {
     const debouncedHandleResize = debounce$1(syncHeight);
     const textarea = textareaRef?.current;
@@ -19875,7 +19888,7 @@ const TextareaAutosize = /* @__PURE__ */ React$H.forwardRef(function TextareaAut
       onChange(event);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$H.Fragment, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$I.Fragment, {
     children: [/* @__PURE__ */ jsxRuntimeExports.jsx("textarea", {
       value,
       onChange: handleChange,
@@ -19915,13 +19928,13 @@ function formControlState({
   }, {});
 }
 
+const React$H = await importShared('react');
+
+const FormControlContext = /* @__PURE__ */ React$H.createContext(void 0);
+
 const React$G = await importShared('react');
-
-const FormControlContext = /* @__PURE__ */ React$G.createContext(void 0);
-
-const React$F = await importShared('react');
 function useFormControl() {
-  return React$F.useContext(FormControlContext);
+  return React$G.useContext(FormControlContext);
 }
 
 // Supports determination of isControlled().
@@ -19961,7 +19974,7 @@ function getInputBaseUtilityClass(slot) {
 const inputBaseClasses = generateUtilityClasses('MuiInputBase', ['root', 'formControl', 'focused', 'disabled', 'adornedStart', 'adornedEnd', 'error', 'sizeSmall', 'multiline', 'colorSecondary', 'fullWidth', 'hiddenLabel', 'readOnly', 'input', 'inputSizeSmall', 'inputMultiline', 'inputTypeSearch', 'inputAdornedStart', 'inputAdornedEnd', 'inputHiddenLabel']);
 
 var _InputGlobalStyles;
-const React$E = await importShared('react');
+const React$F = await importShared('react');
 const rootOverridesResolver = (props, styles) => {
   const {
     ownerState
@@ -19974,7 +19987,7 @@ const inputOverridesResolver = (props, styles) => {
   } = props;
   return [styles.input, ownerState.size === "small" && styles.inputSizeSmall, ownerState.multiline && styles.inputMultiline, ownerState.type === "search" && styles.inputTypeSearch, ownerState.startAdornment && styles.inputAdornedStart, ownerState.endAdornment && styles.inputAdornedEnd, ownerState.hiddenLabel && styles.inputHiddenLabel];
 };
-const useUtilityClasses$v = (ownerState) => {
+const useUtilityClasses$w = (ownerState) => {
   const {
     classes,
     color,
@@ -20173,7 +20186,7 @@ const InputGlobalStyles = globalCss({
     }
   }
 });
-const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps, ref) {
+const InputBase = /* @__PURE__ */ React$F.forwardRef(function InputBase2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiInputBase"
@@ -20222,12 +20235,12 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
   const value = inputPropsProp.value != null ? inputPropsProp.value : valueProp;
   const {
     current: isControlled
-  } = React$E.useRef(value != null);
-  const inputRef = React$E.useRef();
-  const handleInputRefWarning = React$E.useCallback((instance) => {
+  } = React$F.useRef(value != null);
+  const inputRef = React$F.useRef();
+  const handleInputRefWarning = React$F.useCallback((instance) => {
   }, []);
   const handleInputRef = useForkRef(inputRef, inputRefProp, inputPropsProp.ref, handleInputRefWarning);
-  const [focused, setFocused] = React$E.useState(false);
+  const [focused, setFocused] = React$F.useState(false);
   const muiFormControl = useFormControl();
   const fcs = formControlState({
     props,
@@ -20235,7 +20248,7 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
     states: ["color", "disabled", "error", "hiddenLabel", "size", "required", "filled"]
   });
   fcs.focused = muiFormControl ? muiFormControl.focused : focused;
-  React$E.useEffect(() => {
+  React$F.useEffect(() => {
     if (!muiFormControl && disabled && focused) {
       setFocused(false);
       if (onBlur) {
@@ -20245,7 +20258,7 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
   }, [muiFormControl, disabled, focused, onBlur]);
   const onFilled = muiFormControl && muiFormControl.onFilled;
   const onEmpty = muiFormControl && muiFormControl.onEmpty;
-  const checkDirty = React$E.useCallback((obj) => {
+  const checkDirty = React$F.useCallback((obj) => {
     if (isFilled(obj)) {
       if (onFilled) {
         onFilled();
@@ -20304,7 +20317,7 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
       onChange(event, ...args);
     }
   };
-  React$E.useEffect(() => {
+  React$F.useEffect(() => {
     checkDirty(inputRef.current);
   }, []);
   const handleClick = (event) => {
@@ -20340,7 +20353,7 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
       value: "x"
     });
   };
-  React$E.useEffect(() => {
+  React$F.useEffect(() => {
     if (muiFormControl) {
       muiFormControl.setAdornedStart(Boolean(startAdornment));
     }
@@ -20360,7 +20373,7 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
     startAdornment,
     type
   };
-  const classes = useUtilityClasses$v(ownerState);
+  const classes = useUtilityClasses$w(ownerState);
   const Root = slots.root || components.Root || InputBaseRoot;
   const rootProps = slotProps.root || componentsProps.root || {};
   const Input = slots.input || components.Input || InputBaseInput;
@@ -20368,7 +20381,7 @@ const InputBase = /* @__PURE__ */ React$E.forwardRef(function InputBase2(inProps
     ...inputProps,
     ...slotProps.input ?? componentsProps.input
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$E.Fragment, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$F.Fragment, {
     children: [!disableInjectingGlobalStyles && typeof InputGlobalStyles === "function" && // For Emotion/Styled-components, InputGlobalStyles will be a function
     // For Pigment CSS, this has no effect because the InputGlobalStyles will be null.
     (_InputGlobalStyles || (_InputGlobalStyles = /* @__PURE__ */ jsxRuntimeExports.jsx(InputGlobalStyles, {}))), /* @__PURE__ */ jsxRuntimeExports.jsxs(Root, {
@@ -20462,8 +20475,8 @@ function getAvatarUtilityClass(slot) {
 }
 generateUtilityClasses('MuiAvatar', ['root', 'colorDefault', 'circular', 'rounded', 'square', 'img', 'fallback']);
 
-const React$D = await importShared('react');
-const useUtilityClasses$u = (ownerState) => {
+const React$E = await importShared('react');
+const useUtilityClasses$v = (ownerState) => {
   const {
     classes,
     variant,
@@ -20559,8 +20572,8 @@ function useLoaded({
   src,
   srcSet
 }) {
-  const [loaded, setLoaded] = React$D.useState(false);
-  React$D.useEffect(() => {
+  const [loaded, setLoaded] = React$E.useState(false);
+  React$E.useEffect(() => {
     if (!src && !srcSet) {
       return void 0;
     }
@@ -20591,7 +20604,7 @@ function useLoaded({
   }, [crossOrigin, referrerPolicy, src, srcSet]);
   return loaded;
 }
-const Avatar = /* @__PURE__ */ React$D.forwardRef(function Avatar2(inProps, ref) {
+const Avatar = /* @__PURE__ */ React$E.forwardRef(function Avatar2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiAvatar"
@@ -20626,7 +20639,7 @@ const Avatar = /* @__PURE__ */ React$D.forwardRef(function Avatar2(inProps, ref)
   const hasImgNotFailing = hasImg && loaded !== "error";
   ownerState.colorDefault = !hasImgNotFailing;
   delete ownerState.ownerState;
-  const classes = useUtilityClasses$u(ownerState);
+  const classes = useUtilityClasses$v(ownerState);
   const [RootSlot, rootSlotProps] = useSlot("root", {
     ref,
     className: clsx(classes.root, className),
@@ -20688,7 +20701,7 @@ const Avatar = /* @__PURE__ */ React$D.forwardRef(function Avatar2(inProps, ref)
   });
 });
 
-const React$C = await importShared('react');
+const React$D = await importShared('react');
 const styles$1 = {
   entering: {
     opacity: 1
@@ -20697,7 +20710,7 @@ const styles$1 = {
     opacity: 1
   }
 };
-const Fade = /* @__PURE__ */ React$C.forwardRef(function Fade2(props, ref) {
+const Fade = /* @__PURE__ */ React$D.forwardRef(function Fade2(props, ref) {
   const theme = useTheme();
   const defaultTimeout = {
     enter: theme.transitions.duration.enteringScreen,
@@ -20721,7 +20734,7 @@ const Fade = /* @__PURE__ */ React$C.forwardRef(function Fade2(props, ref) {
     TransitionComponent = Transition$1,
     ...other
   } = props;
-  const nodeRef = React$C.useRef(null);
+  const nodeRef = React$D.useRef(null);
   const handleRef = useForkRef(nodeRef, getReactElementRef(children), ref);
   const normalizedTransitionCallback = (callback) => (maybeIsAppearing) => {
     if (callback) {
@@ -20788,7 +20801,7 @@ const Fade = /* @__PURE__ */ React$C.forwardRef(function Fade2(props, ref) {
       ownerState,
       ...restChildProps
     }) => {
-      return /* @__PURE__ */ React$C.cloneElement(children, {
+      return /* @__PURE__ */ React$D.cloneElement(children, {
         style: {
           opacity: 0,
           visibility: state === "exited" && !inProp ? "hidden" : void 0,
@@ -20808,8 +20821,8 @@ function getBackdropUtilityClass(slot) {
 }
 generateUtilityClasses('MuiBackdrop', ['root', 'invisible']);
 
-const React$B = await importShared('react');
-const useUtilityClasses$t = (ownerState) => {
+const React$C = await importShared('react');
+const useUtilityClasses$u = (ownerState) => {
   const {
     classes,
     invisible
@@ -20848,7 +20861,7 @@ const BackdropRoot = styled("div", {
     }
   }]
 });
-const Backdrop = /* @__PURE__ */ React$B.forwardRef(function Backdrop2(inProps, ref) {
+const Backdrop = /* @__PURE__ */ React$C.forwardRef(function Backdrop2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiBackdrop"
@@ -20872,7 +20885,7 @@ const Backdrop = /* @__PURE__ */ React$B.forwardRef(function Backdrop2(inProps, 
     component,
     invisible
   };
-  const classes = useUtilityClasses$t(ownerState);
+  const classes = useUtilityClasses$u(ownerState);
   const backwardCompatibleSlots = {
     transition: TransitionComponentProp,
     root: components.Root,
@@ -20927,16 +20940,16 @@ function getButtonUtilityClass(slot) {
 }
 const buttonClasses = generateUtilityClasses('MuiButton', ['root', 'text', 'textInherit', 'textPrimary', 'textSecondary', 'textSuccess', 'textError', 'textInfo', 'textWarning', 'outlined', 'outlinedInherit', 'outlinedPrimary', 'outlinedSecondary', 'outlinedSuccess', 'outlinedError', 'outlinedInfo', 'outlinedWarning', 'contained', 'containedInherit', 'containedPrimary', 'containedSecondary', 'containedSuccess', 'containedError', 'containedInfo', 'containedWarning', 'disableElevation', 'focusVisible', 'disabled', 'colorInherit', 'colorPrimary', 'colorSecondary', 'colorSuccess', 'colorError', 'colorInfo', 'colorWarning', 'textSizeSmall', 'textSizeMedium', 'textSizeLarge', 'outlinedSizeSmall', 'outlinedSizeMedium', 'outlinedSizeLarge', 'containedSizeSmall', 'containedSizeMedium', 'containedSizeLarge', 'sizeMedium', 'sizeSmall', 'sizeLarge', 'fullWidth', 'startIcon', 'endIcon', 'icon', 'iconSizeSmall', 'iconSizeMedium', 'iconSizeLarge', 'loading', 'loadingWrapper', 'loadingIconPlaceholder', 'loadingIndicator', 'loadingPositionCenter', 'loadingPositionStart', 'loadingPositionEnd']);
 
+const React$B = await importShared('react');
+
+const ButtonGroupContext = /* @__PURE__ */ React$B.createContext({});
+
 const React$A = await importShared('react');
 
-const ButtonGroupContext = /* @__PURE__ */ React$A.createContext({});
+const ButtonGroupButtonContext = /* @__PURE__ */ React$A.createContext(void 0);
 
 const React$z = await importShared('react');
-
-const ButtonGroupButtonContext = /* @__PURE__ */ React$z.createContext(void 0);
-
-const React$y = await importShared('react');
-const useUtilityClasses$s = (ownerState) => {
+const useUtilityClasses$t = (ownerState) => {
   const {
     color,
     disableElevation,
@@ -21386,9 +21399,9 @@ const ButtonLoadingIconPlaceholder = styled("span", {
   width: "1em",
   height: "1em"
 });
-const Button = /* @__PURE__ */ React$y.forwardRef(function Button2(inProps, ref) {
-  const contextProps = React$y.useContext(ButtonGroupContext);
-  const buttonGroupButtonContextPositionClassName = React$y.useContext(ButtonGroupButtonContext);
+const Button = /* @__PURE__ */ React$z.forwardRef(function Button2(inProps, ref) {
+  const contextProps = React$z.useContext(ButtonGroupContext);
+  const buttonGroupButtonContextPositionClassName = React$z.useContext(ButtonGroupButtonContext);
   const resolvedProps = resolveProps(contextProps, inProps);
   const props = useDefaultProps({
     props: resolvedProps,
@@ -21436,7 +21449,7 @@ const Button = /* @__PURE__ */ React$y.forwardRef(function Button2(inProps, ref)
     type,
     variant
   };
-  const classes = useUtilityClasses$s(ownerState);
+  const classes = useUtilityClasses$t(ownerState);
   const startIcon = (startIconProp || loading && loadingPosition === "start") && /* @__PURE__ */ jsxRuntimeExports.jsx(ButtonStartIcon, {
     className: classes.startIcon,
     ownerState,
@@ -21489,8 +21502,8 @@ function getCardUtilityClass(slot) {
 }
 generateUtilityClasses('MuiCard', ['root']);
 
-const React$x = await importShared('react');
-const useUtilityClasses$r = (ownerState) => {
+const React$y = await importShared('react');
+const useUtilityClasses$s = (ownerState) => {
   const {
     classes
   } = ownerState;
@@ -21505,7 +21518,7 @@ const CardRoot = styled(Paper, {
 })({
   overflow: "hidden"
 });
-const Card = /* @__PURE__ */ React$x.forwardRef(function Card2(inProps, ref) {
+const Card = /* @__PURE__ */ React$y.forwardRef(function Card2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiCard"
@@ -21519,7 +21532,7 @@ const Card = /* @__PURE__ */ React$x.forwardRef(function Card2(inProps, ref) {
     ...props,
     raised
   };
-  const classes = useUtilityClasses$r(ownerState);
+  const classes = useUtilityClasses$s(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(CardRoot, {
     className: clsx(classes.root, className),
     elevation: raised ? 8 : void 0,
@@ -21534,8 +21547,8 @@ function getCardActionAreaUtilityClass(slot) {
 }
 const cardActionAreaClasses = generateUtilityClasses('MuiCardActionArea', ['root', 'focusVisible', 'focusHighlight']);
 
-const React$w = await importShared('react');
-const useUtilityClasses$q = (ownerState) => {
+const React$x = await importShared('react');
+const useUtilityClasses$r = (ownerState) => {
   const {
     classes
   } = ownerState;
@@ -21586,7 +21599,7 @@ const CardActionAreaFocusHighlight = styled("span", {
     duration: theme.transitions.duration.short
   })
 })));
-const CardActionArea = /* @__PURE__ */ React$w.forwardRef(function CardActionArea2(inProps, ref) {
+const CardActionArea = /* @__PURE__ */ React$x.forwardRef(function CardActionArea2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiCardActionArea"
@@ -21600,7 +21613,7 @@ const CardActionArea = /* @__PURE__ */ React$w.forwardRef(function CardActionAre
     ...other
   } = props;
   const ownerState = props;
-  const classes = useUtilityClasses$q(ownerState);
+  const classes = useUtilityClasses$r(ownerState);
   const externalForwardedProps = {
     slots,
     slotProps
@@ -21638,8 +21651,8 @@ function getCardContentUtilityClass(slot) {
 }
 generateUtilityClasses('MuiCardContent', ['root']);
 
-const React$v = await importShared('react');
-const useUtilityClasses$p = (ownerState) => {
+const React$w = await importShared('react');
+const useUtilityClasses$q = (ownerState) => {
   const {
     classes
   } = ownerState;
@@ -21657,7 +21670,7 @@ const CardContentRoot = styled("div", {
     paddingBottom: 24
   }
 });
-const CardContent = /* @__PURE__ */ React$v.forwardRef(function CardContent2(inProps, ref) {
+const CardContent = /* @__PURE__ */ React$w.forwardRef(function CardContent2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiCardContent"
@@ -21671,7 +21684,7 @@ const CardContent = /* @__PURE__ */ React$v.forwardRef(function CardContent2(inP
     ...props,
     component
   };
-  const classes = useUtilityClasses$p(ownerState);
+  const classes = useUtilityClasses$q(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(CardContentRoot, {
     as: component,
     className: clsx(classes.root, className),
@@ -21944,7 +21957,7 @@ function activeElement(doc) {
   return element;
 }
 
-const React$u = await importShared('react');
+const React$v = await importShared('react');
 const candidatesSelector = ["input", "select", "textarea", "a[href]", "button", "[tabindex]", "audio[controls]", "video[controls]", '[contenteditable]:not([contenteditable="false"])'].join(",");
 function getTabIndex(node) {
   const tabindexAttr = parseInt(node.getAttribute("tabindex") || "", 10);
@@ -22009,22 +22022,22 @@ function FocusTrap(props) {
     isEnabled = defaultIsEnabled,
     open
   } = props;
-  const ignoreNextEnforceFocus = React$u.useRef(false);
-  const sentinelStart = React$u.useRef(null);
-  const sentinelEnd = React$u.useRef(null);
-  const nodeToRestore = React$u.useRef(null);
-  const reactFocusEventTarget = React$u.useRef(null);
-  const activated = React$u.useRef(false);
-  const rootRef = React$u.useRef(null);
+  const ignoreNextEnforceFocus = React$v.useRef(false);
+  const sentinelStart = React$v.useRef(null);
+  const sentinelEnd = React$v.useRef(null);
+  const nodeToRestore = React$v.useRef(null);
+  const reactFocusEventTarget = React$v.useRef(null);
+  const activated = React$v.useRef(false);
+  const rootRef = React$v.useRef(null);
   const handleRef = useForkRef(getReactElementRef(children), rootRef);
-  const lastKeydown = React$u.useRef(null);
-  React$u.useEffect(() => {
+  const lastKeydown = React$v.useRef(null);
+  React$v.useEffect(() => {
     if (!open || !rootRef.current) {
       return;
     }
     activated.current = !disableAutoFocus;
   }, [disableAutoFocus, open]);
-  React$u.useEffect(() => {
+  React$v.useEffect(() => {
     if (!open || !rootRef.current) {
       return;
     }
@@ -22048,7 +22061,7 @@ function FocusTrap(props) {
       }
     };
   }, [open]);
-  React$u.useEffect(() => {
+  React$v.useEffect(() => {
     if (!open || !rootRef.current) {
       return;
     }
@@ -22140,13 +22153,13 @@ function FocusTrap(props) {
     }
     activated.current = true;
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$u.Fragment, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(React$v.Fragment, {
     children: [/* @__PURE__ */ jsxRuntimeExports.jsx("div", {
       tabIndex: open ? 0 : -1,
       onFocus: handleFocusSentinel,
       ref: sentinelStart,
       "data-testid": "sentinelStart"
-    }), /* @__PURE__ */ React$u.cloneElement(children, {
+    }), /* @__PURE__ */ React$v.cloneElement(children, {
       ref: handleRef,
       onFocus
     }), /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
@@ -22158,7 +22171,7 @@ function FocusTrap(props) {
   });
 }
 
-const React$t = await importShared('react');
+const React$u = await importShared('react');
 function getContainer(container) {
   return typeof container === 'function' ? container() : container;
 }
@@ -22185,11 +22198,11 @@ function useModal(parameters) {
   } = parameters;
 
   // @ts-ignore internal logic
-  const modal = React$t.useRef({});
-  const mountNodeRef = React$t.useRef(null);
-  const modalRef = React$t.useRef(null);
+  const modal = React$u.useRef({});
+  const mountNodeRef = React$u.useRef(null);
+  const modalRef = React$u.useRef(null);
   const handleRef = useForkRef(modalRef, rootRef);
-  const [exited, setExited] = React$t.useState(!open);
+  const [exited, setExited] = React$u.useState(!open);
   const hasTransition = getHasTransition(children);
   let ariaHiddenProp = true;
   if (parameters['aria-hidden'] === 'false' || parameters['aria-hidden'] === false) {
@@ -22232,15 +22245,15 @@ function useModal(parameters) {
       ariaHidden(modalRef.current, ariaHiddenProp);
     }
   });
-  const handleClose = React$t.useCallback(() => {
+  const handleClose = React$u.useCallback(() => {
     manager.remove(getModal(), ariaHiddenProp);
   }, [ariaHiddenProp]);
-  React$t.useEffect(() => {
+  React$u.useEffect(() => {
     return () => {
       handleClose();
     };
   }, [handleClose]);
-  React$t.useEffect(() => {
+  React$u.useEffect(() => {
     if (open) {
       handleOpen();
     } else if (!hasTransition || !closeAfterTransition) {
@@ -22348,8 +22361,8 @@ function getModalUtilityClass(slot) {
 }
 generateUtilityClasses('MuiModal', ['root', 'hidden', 'backdrop']);
 
-const React$s = await importShared('react');
-const useUtilityClasses$o = (ownerState) => {
+const React$t = await importShared('react');
+const useUtilityClasses$p = (ownerState) => {
   const {
     open,
     exited,
@@ -22394,7 +22407,7 @@ const ModalBackdrop = styled(Backdrop, {
 })({
   zIndex: -1
 });
-const Modal = /* @__PURE__ */ React$s.forwardRef(function Modal2(inProps, ref) {
+const Modal = /* @__PURE__ */ React$t.forwardRef(function Modal2(inProps, ref) {
   const props = useDefaultProps({
     name: "MuiModal",
     props: inProps
@@ -22456,7 +22469,7 @@ const Modal = /* @__PURE__ */ React$s.forwardRef(function Modal2(inProps, ref) {
     ...propsWithDefaults,
     exited
   };
-  const classes = useUtilityClasses$o(ownerState);
+  const classes = useUtilityClasses$p(ownerState);
   const childProps = {};
   if (children.props.tabIndex === void 0) {
     childProps.tabIndex = "-1";
@@ -22528,14 +22541,14 @@ const Modal = /* @__PURE__ */ React$s.forwardRef(function Modal2(inProps, ref) {
         disableRestoreFocus,
         isEnabled: isTopModal,
         open,
-        children: /* @__PURE__ */ React$s.cloneElement(children, childProps)
+        children: /* @__PURE__ */ React$t.cloneElement(children, childProps)
       })]
     })
   });
 });
 
-const React$r = await importShared('react');
-const useUtilityClasses$n = (ownerState) => {
+const React$s = await importShared('react');
+const useUtilityClasses$o = (ownerState) => {
   const {
     classes,
     disableUnderline,
@@ -22787,7 +22800,7 @@ const FilledInputInput = styled(InputBaseInput, {
     }
   }]
 })));
-const FilledInput = /* @__PURE__ */ React$r.forwardRef(function FilledInput2(inProps, ref) {
+const FilledInput = /* @__PURE__ */ React$s.forwardRef(function FilledInput2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiFilledInput"
@@ -22814,7 +22827,7 @@ const FilledInput = /* @__PURE__ */ React$r.forwardRef(function FilledInput2(inP
     multiline,
     type
   };
-  const classes = useUtilityClasses$n(props);
+  const classes = useUtilityClasses$o(props);
   const filledInputComponentsProps = {
     root: {
       ownerState
@@ -22848,8 +22861,8 @@ function getFormControlUtilityClasses(slot) {
 }
 generateUtilityClasses('MuiFormControl', ['root', 'marginNone', 'marginNormal', 'marginDense', 'fullWidth', 'disabled']);
 
-const React$q = await importShared('react');
-const useUtilityClasses$m = (ownerState) => {
+const React$r = await importShared('react');
+const useUtilityClasses$n = (ownerState) => {
   const {
     classes,
     margin,
@@ -22905,7 +22918,7 @@ const FormControlRoot = styled("div", {
     }
   }]
 });
-const FormControl = /* @__PURE__ */ React$q.forwardRef(function FormControl2(inProps, ref) {
+const FormControl = /* @__PURE__ */ React$r.forwardRef(function FormControl2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiFormControl"
@@ -22939,11 +22952,11 @@ const FormControl = /* @__PURE__ */ React$q.forwardRef(function FormControl2(inP
     size,
     variant
   };
-  const classes = useUtilityClasses$m(ownerState);
-  const [adornedStart, setAdornedStart] = React$q.useState(() => {
+  const classes = useUtilityClasses$n(ownerState);
+  const [adornedStart, setAdornedStart] = React$r.useState(() => {
     let initialAdornedStart = false;
     if (children) {
-      React$q.Children.forEach(children, (child) => {
+      React$r.Children.forEach(children, (child) => {
         if (!isMuiElement(child, ["Input", "Select"])) {
           return;
         }
@@ -22955,10 +22968,10 @@ const FormControl = /* @__PURE__ */ React$q.forwardRef(function FormControl2(inP
     }
     return initialAdornedStart;
   });
-  const [filled, setFilled] = React$q.useState(() => {
+  const [filled, setFilled] = React$r.useState(() => {
     let initialFilled = false;
     if (children) {
-      React$q.Children.forEach(children, (child) => {
+      React$r.Children.forEach(children, (child) => {
         if (!isMuiElement(child, ["Input", "Select"])) {
           return;
         }
@@ -22969,20 +22982,20 @@ const FormControl = /* @__PURE__ */ React$q.forwardRef(function FormControl2(inP
     }
     return initialFilled;
   });
-  const [focusedState, setFocused] = React$q.useState(false);
+  const [focusedState, setFocused] = React$r.useState(false);
   if (disabled && focusedState) {
     setFocused(false);
   }
   const focused = visuallyFocused !== void 0 && !disabled ? visuallyFocused : focusedState;
   let registerEffect;
-  React$q.useRef(false);
-  const onFilled = React$q.useCallback(() => {
+  React$r.useRef(false);
+  const onFilled = React$r.useCallback(() => {
     setFilled(true);
   }, []);
-  const onEmpty = React$q.useCallback(() => {
+  const onEmpty = React$r.useCallback(() => {
     setFilled(false);
   }, []);
-  const childContext = React$q.useMemo(() => {
+  const childContext = React$r.useMemo(() => {
     return {
       adornedStart,
       setAdornedStart,
@@ -23026,8 +23039,8 @@ function getFormHelperTextUtilityClasses(slot) {
 const formHelperTextClasses = generateUtilityClasses('MuiFormHelperText', ['root', 'error', 'disabled', 'sizeSmall', 'sizeMedium', 'contained', 'focused', 'filled', 'required']);
 
 var _span$3;
-const React$p = await importShared('react');
-const useUtilityClasses$l = (ownerState) => {
+const React$q = await importShared('react');
+const useUtilityClasses$m = (ownerState) => {
   const {
     classes,
     contained,
@@ -23085,7 +23098,7 @@ const FormHelperTextRoot = styled("p", {
     }
   }]
 })));
-const FormHelperText = /* @__PURE__ */ React$p.forwardRef(function FormHelperText2(inProps, ref) {
+const FormHelperText = /* @__PURE__ */ React$q.forwardRef(function FormHelperText2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiFormHelperText"
@@ -23122,7 +23135,7 @@ const FormHelperText = /* @__PURE__ */ React$p.forwardRef(function FormHelperTex
     required: fcs.required
   };
   delete ownerState.ownerState;
-  const classes = useUtilityClasses$l(ownerState);
+  const classes = useUtilityClasses$m(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(FormHelperTextRoot, {
     as: component,
     className: clsx(classes.root, className),
@@ -23145,8 +23158,8 @@ function getFormLabelUtilityClasses(slot) {
 }
 const formLabelClasses = generateUtilityClasses('MuiFormLabel', ['root', 'colorSecondary', 'focused', 'disabled', 'error', 'filled', 'required', 'asterisk']);
 
-const React$o = await importShared('react');
-const useUtilityClasses$k = (ownerState) => {
+const React$p = await importShared('react');
+const useUtilityClasses$l = (ownerState) => {
   const {
     classes,
     color,
@@ -23210,7 +23223,7 @@ const AsteriskComponent = styled("span", {
     color: (theme.vars || theme).palette.error.main
   }
 })));
-const FormLabel = /* @__PURE__ */ React$o.forwardRef(function FormLabel2(inProps, ref) {
+const FormLabel = /* @__PURE__ */ React$p.forwardRef(function FormLabel2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiFormLabel"
@@ -23243,7 +23256,7 @@ const FormLabel = /* @__PURE__ */ React$o.forwardRef(function FormLabel2(inProps
     focused: fcs.focused,
     required: fcs.required
   };
-  const classes = useUtilityClasses$k(ownerState);
+  const classes = useUtilityClasses$l(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(FormLabelRoot, {
     as: component,
     ownerState,
@@ -23278,7 +23291,7 @@ const Grid = createGrid({
   useTheme
 });
 
-const React$n = await importShared('react');
+const React$o = await importShared('react');
 function getScale(value) {
   return `scale(${value}, ${value ** 2})`;
 }
@@ -23293,7 +23306,7 @@ const styles = {
   }
 };
 const isWebKit154 = typeof navigator !== "undefined" && /^((?!chrome|android).)*(safari|mobile)/i.test(navigator.userAgent) && /(os |version\/)15(.|_)4/i.test(navigator.userAgent);
-const Grow = /* @__PURE__ */ React$n.forwardRef(function Grow2(props, ref) {
+const Grow = /* @__PURE__ */ React$o.forwardRef(function Grow2(props, ref) {
   const {
     addEndListener,
     appear = true,
@@ -23313,9 +23326,9 @@ const Grow = /* @__PURE__ */ React$n.forwardRef(function Grow2(props, ref) {
     ...other
   } = props;
   const timer = useTimeout();
-  const autoTimeout = React$n.useRef();
+  const autoTimeout = React$o.useRef();
   const theme = useTheme();
-  const nodeRef = React$n.useRef(null);
+  const nodeRef = React$o.useRef(null);
   const handleRef = useForkRef(nodeRef, getReactElementRef(children), ref);
   const normalizedTransitionCallback = (callback) => (maybeIsAppearing) => {
     if (callback) {
@@ -23421,7 +23434,7 @@ const Grow = /* @__PURE__ */ React$n.forwardRef(function Grow2(props, ref) {
       ownerState,
       ...restChildProps
     }) => {
-      return /* @__PURE__ */ React$n.cloneElement(children, {
+      return /* @__PURE__ */ React$o.cloneElement(children, {
         style: {
           opacity: 0,
           transform: getScale(0.75),
@@ -23440,8 +23453,8 @@ if (Grow) {
   Grow.muiSupportAuto = true;
 }
 
-const React$m = await importShared('react');
-const useUtilityClasses$j = (ownerState) => {
+const React$n = await importShared('react');
+const useUtilityClasses$k = (ownerState) => {
   const {
     classes,
     disableUnderline
@@ -23557,7 +23570,7 @@ const InputInput = styled(InputBaseInput, {
   slot: "Input",
   overridesResolver: inputOverridesResolver
 })({});
-const Input = /* @__PURE__ */ React$m.forwardRef(function Input2(inProps, ref) {
+const Input = /* @__PURE__ */ React$n.forwardRef(function Input2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiInput"
@@ -23574,7 +23587,7 @@ const Input = /* @__PURE__ */ React$m.forwardRef(function Input2(inProps, ref) {
     type = "text",
     ...other
   } = props;
-  const classes = useUtilityClasses$j(props);
+  const classes = useUtilityClasses$k(props);
   const ownerState = {
     disableUnderline
   };
@@ -23609,14 +23622,14 @@ function getInputAdornmentUtilityClass(slot) {
 const inputAdornmentClasses = generateUtilityClasses('MuiInputAdornment', ['root', 'filled', 'standard', 'outlined', 'positionStart', 'positionEnd', 'disablePointerEvents', 'hiddenLabel', 'sizeSmall']);
 
 var _span$2;
-const React$l = await importShared('react');
+const React$m = await importShared('react');
 const overridesResolver$3 = (props, styles) => {
   const {
     ownerState
   } = props;
   return [styles.root, styles[`position${capitalize(ownerState.position)}`], ownerState.disablePointerEvents === true && styles.disablePointerEvents, styles[ownerState.variant]];
 };
-const useUtilityClasses$i = (ownerState) => {
+const useUtilityClasses$j = (ownerState) => {
   const {
     classes,
     disablePointerEvents,
@@ -23674,7 +23687,7 @@ const InputAdornmentRoot = styled("div", {
     }
   }]
 })));
-const InputAdornment = /* @__PURE__ */ React$l.forwardRef(function InputAdornment2(inProps, ref) {
+const InputAdornment = /* @__PURE__ */ React$m.forwardRef(function InputAdornment2(inProps, ref) {
   const props = useDefaultProps({
     props: inProps,
     name: "MuiInputAdornment"
@@ -23703,7 +23716,7 @@ const InputAdornment = /* @__PURE__ */ React$l.forwardRef(function InputAdornmen
     position,
     variant
   };
-  const classes = useUtilityClasses$i(ownerState);
+  const classes = useUtilityClasses$j(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(FormControlContext.Provider, {
     value: null,
     children: /* @__PURE__ */ jsxRuntimeExports.jsx(InputAdornmentRoot, {
@@ -23715,7 +23728,7 @@ const InputAdornment = /* @__PURE__ */ React$l.forwardRef(function InputAdornmen
       children: typeof children === "string" && !disableTypography ? /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, {
         color: "textSecondary",
         children
-      }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(React$l.Fragment, {
+      }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(React$m.Fragment, {
         children: [position === "start" ? (
           /* notranslate needed while Google Translate will not fix zero-width space issue */
           _span$2 || (_span$2 = /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
@@ -23734,8 +23747,8 @@ function getInputLabelUtilityClasses(slot) {
 }
 generateUtilityClasses('MuiInputLabel', ['root', 'focused', 'disabled', 'error', 'required', 'asterisk', 'formControl', 'sizeSmall', 'shrink', 'animated', 'standard', 'filled', 'outlined']);
 
-const React$k = await importShared('react');
-const useUtilityClasses$h = (ownerState) => {
+const React$l = await importShared('react');
+const useUtilityClasses$i = (ownerState) => {
   const {
     classes,
     formControl,
@@ -23891,7 +23904,7 @@ const InputLabelRoot = styled(FormLabel, {
     }
   }]
 })));
-const InputLabel = /* @__PURE__ */ React$k.forwardRef(function InputLabel2(inProps, ref) {
+const InputLabel = /* @__PURE__ */ React$l.forwardRef(function InputLabel2(inProps, ref) {
   const props = useDefaultProps({
     name: "MuiInputLabel",
     props: inProps
@@ -23924,7 +23937,7 @@ const InputLabel = /* @__PURE__ */ React$k.forwardRef(function InputLabel2(inPro
     required: fcs.required,
     focused: fcs.focused
   };
-  const classes = useUtilityClasses$h(ownerState);
+  const classes = useUtilityClasses$i(ownerState);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(InputLabelRoot, {
     "data-shrink": shrink,
     ref,
@@ -23932,6 +23945,395 @@ const InputLabel = /* @__PURE__ */ React$k.forwardRef(function InputLabel2(inPro
     ...other,
     ownerState,
     classes
+  });
+});
+
+function getLinearProgressUtilityClass(slot) {
+  return generateUtilityClass('MuiLinearProgress', slot);
+}
+generateUtilityClasses('MuiLinearProgress', ['root', 'colorPrimary', 'colorSecondary', 'determinate', 'indeterminate', 'buffer', 'query', 'dashed', 'dashedColorPrimary', 'dashedColorSecondary', 'bar', 'bar1', 'bar2', 'barColorPrimary', 'barColorSecondary', 'bar1Indeterminate', 'bar1Determinate', 'bar1Buffer', 'bar2Indeterminate', 'bar2Buffer']);
+
+const React$k = await importShared('react');
+const TRANSITION_DURATION = 4;
+const indeterminate1Keyframe = keyframes`
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+`;
+const indeterminate1Animation = typeof indeterminate1Keyframe !== "string" ? css`
+        animation: ${indeterminate1Keyframe} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+      ` : null;
+const indeterminate2Keyframe = keyframes`
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+`;
+const indeterminate2Animation = typeof indeterminate2Keyframe !== "string" ? css`
+        animation: ${indeterminate2Keyframe} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+      ` : null;
+const bufferKeyframe = keyframes`
+  0% {
+    opacity: 1;
+    background-position: 0 -23px;
+  }
+
+  60% {
+    opacity: 0;
+    background-position: 0 -23px;
+  }
+
+  100% {
+    opacity: 1;
+    background-position: -200px -23px;
+  }
+`;
+const bufferAnimation = typeof bufferKeyframe !== "string" ? css`
+        animation: ${bufferKeyframe} 3s infinite linear;
+      ` : null;
+const useUtilityClasses$h = (ownerState) => {
+  const {
+    classes,
+    variant,
+    color
+  } = ownerState;
+  const slots = {
+    root: ["root", `color${capitalize(color)}`, variant],
+    dashed: ["dashed", `dashedColor${capitalize(color)}`],
+    bar1: ["bar", "bar1", `barColor${capitalize(color)}`, (variant === "indeterminate" || variant === "query") && "bar1Indeterminate", variant === "determinate" && "bar1Determinate", variant === "buffer" && "bar1Buffer"],
+    bar2: ["bar", "bar2", variant !== "buffer" && `barColor${capitalize(color)}`, variant === "buffer" && `color${capitalize(color)}`, (variant === "indeterminate" || variant === "query") && "bar2Indeterminate", variant === "buffer" && "bar2Buffer"]
+  };
+  return composeClasses(slots, getLinearProgressUtilityClass, classes);
+};
+const getColorShade = (theme, color) => {
+  if (theme.vars) {
+    return theme.vars.palette.LinearProgress[`${color}Bg`];
+  }
+  return theme.palette.mode === "light" ? theme.lighten(theme.palette[color].main, 0.62) : theme.darken(theme.palette[color].main, 0.5);
+};
+const LinearProgressRoot = styled("span", {
+  name: "MuiLinearProgress",
+  slot: "Root",
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[`color${capitalize(ownerState.color)}`], styles[ownerState.variant]];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  position: "relative",
+  overflow: "hidden",
+  display: "block",
+  height: 4,
+  // Fix Safari's bug during composition of different paint.
+  zIndex: 0,
+  "@media print": {
+    colorAdjust: "exact"
+  },
+  variants: [...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      backgroundColor: getColorShade(theme, color)
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.color === "inherit" && ownerState.variant !== "buffer",
+    style: {
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "currentColor",
+        opacity: 0.3
+      }
+    }
+  }, {
+    props: {
+      variant: "buffer"
+    },
+    style: {
+      backgroundColor: "transparent"
+    }
+  }, {
+    props: {
+      variant: "query"
+    },
+    style: {
+      transform: "rotate(180deg)"
+    }
+  }]
+})));
+const LinearProgressDashed = styled("span", {
+  name: "MuiLinearProgress",
+  slot: "Dashed",
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.dashed, styles[`dashedColor${capitalize(ownerState.color)}`]];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  position: "absolute",
+  marginTop: 0,
+  height: "100%",
+  width: "100%",
+  backgroundSize: "10px 10px",
+  backgroundPosition: "0 -23px",
+  variants: [{
+    props: {
+      color: "inherit"
+    },
+    style: {
+      opacity: 0.3,
+      backgroundImage: `radial-gradient(currentColor 0%, currentColor 16%, transparent 42%)`
+    }
+  }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => {
+    const backgroundColor = getColorShade(theme, color);
+    return {
+      props: {
+        color
+      },
+      style: {
+        backgroundImage: `radial-gradient(${backgroundColor} 0%, ${backgroundColor} 16%, transparent 42%)`
+      }
+    };
+  })]
+})), bufferAnimation || {
+  // At runtime for Pigment CSS, `bufferAnimation` will be null and the generated keyframe will be used.
+  animation: `${bufferKeyframe} 3s infinite linear`
+});
+const LinearProgressBar1 = styled("span", {
+  name: "MuiLinearProgress",
+  slot: "Bar1",
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.bar, styles.bar1, styles[`barColor${capitalize(ownerState.color)}`], (ownerState.variant === "indeterminate" || ownerState.variant === "query") && styles.bar1Indeterminate, ownerState.variant === "determinate" && styles.bar1Determinate, ownerState.variant === "buffer" && styles.bar1Buffer];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  width: "100%",
+  position: "absolute",
+  left: 0,
+  bottom: 0,
+  top: 0,
+  transition: "transform 0.2s linear",
+  transformOrigin: "left",
+  variants: [{
+    props: {
+      color: "inherit"
+    },
+    style: {
+      backgroundColor: "currentColor"
+    }
+  }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      backgroundColor: (theme.vars || theme).palette[color].main
+    }
+  })), {
+    props: {
+      variant: "determinate"
+    },
+    style: {
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
+  }, {
+    props: {
+      variant: "buffer"
+    },
+    style: {
+      zIndex: 1,
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant === "indeterminate" || ownerState.variant === "query",
+    style: {
+      width: "auto"
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant === "indeterminate" || ownerState.variant === "query",
+    style: indeterminate1Animation || {
+      animation: `${indeterminate1Keyframe} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite`
+    }
+  }]
+})));
+const LinearProgressBar2 = styled("span", {
+  name: "MuiLinearProgress",
+  slot: "Bar2",
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.bar, styles.bar2, styles[`barColor${capitalize(ownerState.color)}`], (ownerState.variant === "indeterminate" || ownerState.variant === "query") && styles.bar2Indeterminate, ownerState.variant === "buffer" && styles.bar2Buffer];
+  }
+})(memoTheme(({
+  theme
+}) => ({
+  width: "100%",
+  position: "absolute",
+  left: 0,
+  bottom: 0,
+  top: 0,
+  transition: "transform 0.2s linear",
+  transformOrigin: "left",
+  variants: [...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color
+    },
+    style: {
+      "--LinearProgressBar2-barColor": (theme.vars || theme).palette[color].main
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.variant !== "buffer" && ownerState.color !== "inherit",
+    style: {
+      backgroundColor: "var(--LinearProgressBar2-barColor, currentColor)"
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant !== "buffer" && ownerState.color === "inherit",
+    style: {
+      backgroundColor: "currentColor"
+    }
+  }, {
+    props: {
+      color: "inherit"
+    },
+    style: {
+      opacity: 0.3
+    }
+  }, ...Object.entries(theme.palette).filter(createSimplePaletteValueFilter()).map(([color]) => ({
+    props: {
+      color,
+      variant: "buffer"
+    },
+    style: {
+      backgroundColor: getColorShade(theme, color),
+      transition: `transform .${TRANSITION_DURATION}s linear`
+    }
+  })), {
+    props: ({
+      ownerState
+    }) => ownerState.variant === "indeterminate" || ownerState.variant === "query",
+    style: {
+      width: "auto"
+    }
+  }, {
+    props: ({
+      ownerState
+    }) => ownerState.variant === "indeterminate" || ownerState.variant === "query",
+    style: indeterminate2Animation || {
+      animation: `${indeterminate2Keyframe} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite`
+    }
+  }]
+})));
+const LinearProgress = /* @__PURE__ */ React$k.forwardRef(function LinearProgress2(inProps, ref) {
+  const props = useDefaultProps({
+    props: inProps,
+    name: "MuiLinearProgress"
+  });
+  const {
+    className,
+    color = "primary",
+    value,
+    valueBuffer,
+    variant = "indeterminate",
+    ...other
+  } = props;
+  const ownerState = {
+    ...props,
+    color,
+    variant
+  };
+  const classes = useUtilityClasses$h(ownerState);
+  const isRtl = useRtl();
+  const rootProps = {};
+  const inlineStyles = {
+    bar1: {},
+    bar2: {}
+  };
+  if (variant === "determinate" || variant === "buffer") {
+    if (value !== void 0) {
+      rootProps["aria-valuenow"] = Math.round(value);
+      rootProps["aria-valuemin"] = 0;
+      rootProps["aria-valuemax"] = 100;
+      let transform = value - 100;
+      if (isRtl) {
+        transform = -transform;
+      }
+      inlineStyles.bar1.transform = `translateX(${transform}%)`;
+    }
+  }
+  if (variant === "buffer") {
+    if (valueBuffer !== void 0) {
+      let transform = (valueBuffer || 0) - 100;
+      if (isRtl) {
+        transform = -transform;
+      }
+      inlineStyles.bar2.transform = `translateX(${transform}%)`;
+    }
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(LinearProgressRoot, {
+    className: clsx(classes.root, className),
+    ownerState,
+    role: "progressbar",
+    ...rootProps,
+    ref,
+    ...other,
+    children: [variant === "buffer" ? /* @__PURE__ */ jsxRuntimeExports.jsx(LinearProgressDashed, {
+      className: classes.dashed,
+      ownerState
+    }) : null, /* @__PURE__ */ jsxRuntimeExports.jsx(LinearProgressBar1, {
+      className: classes.bar1,
+      ownerState,
+      style: inlineStyles.bar1
+    }), variant === "determinate" ? null : /* @__PURE__ */ jsxRuntimeExports.jsx(LinearProgressBar2, {
+      className: classes.bar2,
+      ownerState,
+      style: inlineStyles.bar2
+    })]
   });
 });
 
@@ -28131,41 +28533,67 @@ const MapIcon = createSvgIcon(/*#__PURE__*/jsxRuntimeExports.jsx("path", {
 }));
 
 const HEADER_HEIGHT = 64;
-const HeaderContainer = styled(Box)({
-  borderBottom: "1px solid #e0e0e0",
-  width: "100vw",
-  position: "relative",
-  left: "50%",
-  right: "50%",
-  marginLeft: "-50vw",
-  marginRight: "-50vw",
-  padding: 0
-});
-const StyledToolbar = styled(Toolbar)({
-  display: "flex",
-  justifyContent: "space-between",
-  minHeight: HEADER_HEIGHT
-});
-const Logo = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  marginBottom: 0,
-  fontWeight: 500,
-  cursor: "pointer"
-}));
 const Header = () => {
   const navigate = useNavigate();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(HeaderContainer, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppBar, { position: "static", color: "transparent", elevation: 0, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(StyledToolbar, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Logo, { variant: "h4", onClick: () => navigate("/"), children: "GAIA" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { onClick: () => navigate("/"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(SearchIcon, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { onClick: () => navigate("/map"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapIcon, {}) })
-    ] })
-  ] }) }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Box,
+    {
+      sx: {
+        borderBottom: "1px solid #e0e0e0",
+        width: "100vw",
+        position: "relative",
+        left: "50%",
+        right: "50%",
+        marginLeft: "-50vw",
+        marginRight: "-50vw",
+        padding: 0
+      },
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(AppBar, { position: "static", color: "transparent", elevation: 0, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        Toolbar,
+        {
+          sx: {
+            display: "flex",
+            justifyContent: "space-between",
+            minHeight: HEADER_HEIGHT
+          },
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Typography,
+              {
+                variant: "h4",
+                onClick: () => navigate("/"),
+                sx: {
+                  color: "primary.main",
+                  marginBottom: 0,
+                  fontWeight: 500,
+                  cursor: "pointer"
+                },
+                children: "GAIA"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { onClick: () => navigate("/"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(SearchIcon, {}) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { onClick: () => navigate("/map"), children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapIcon, {}) })
+            ] })
+          ]
+        }
+      ) })
+    }
+  );
 };
 
 function RootLayout() {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Header, {}),
+    isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Box,
+      {
+        sx: { position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999 },
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(LinearProgress, {})
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {})
   ] });
 }
@@ -32041,50 +32469,63 @@ const {
   mergeConfig
 } = axios;
 
-const API_BASE_URL = "https://rest-api-gaia.onrender.com";
+class ApiError extends Error {
+  status;
+  constructor(message, status) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
+const API_BASE_URL = undefined                                 ;
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 1e4
+});
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status ?? 500;
+    const message = error.response?.data?.message ?? "Request failed";
+    return Promise.reject(new ApiError(message, status));
+  }
+);
 const searchCountriesByName = async (searchTerm) => {
   if (!searchTerm.trim()) return [];
-  const { data } = await axios.get(
-    `${API_BASE_URL}/api/countries/search`,
-    {
-      params: { q: searchTerm.trim() },
-      timeout: 1e4
-    }
-  );
-  return data;
+  const response = await api.get("/api/countries/search", {
+    params: { q: searchTerm.trim() }
+  });
+  return response.data;
 };
 const getCountryByCode = async (code) => {
   if (!code.trim()) throw new Error("Invalid country code");
   const cca3 = code.toUpperCase();
-  const { data } = await axios.get(
-    `${API_BASE_URL}/api/countries/${cca3}`,
-    {
-      timeout: 3e4
-    }
-  );
-  return data;
+  const response = await api.get(`/api/countries/${cca3}`, {
+    timeout: 3e4
+  });
+  return response.data;
 };
 const getCountrySummary = async (countryName) => {
   if (!countryName.trim()) throw new Error("Invalid country name");
-  const { data } = await axios.get(
-    `${API_BASE_URL}/api/summary`,
+  const response = await api.post(
+    "/api/summary",
+    { country: countryName.trim() },
     {
-      params: { q: countryName.trim() },
       timeout: 6e4
-      // 60 seconds for LLM generation
     }
   );
-  return data;
+  return response.data;
 };
 
-const {useState: useState$6,useEffect: useEffect$5} = await importShared('react');
+const {useState: useState$5,useEffect: useEffect$4} = await importShared('react');
 const HomePage = () => {
-  const [searchTerm, setSearchTerm] = useState$6("");
-  const [searchResults, setSearchResults] = useState$6([]);
-  const [showDropdown, setShowDropdown] = useState$6(false);
-  const [isLoading, setIsLoading] = useState$6(false);
+  const [searchTerm, setSearchTerm] = useState$5("");
+  const [searchResults, setSearchResults] = useState$5([]);
+  const [showDropdown, setShowDropdown] = useState$5(false);
+  const [isLoading, setIsLoading] = useState$5(false);
   const navigate = useNavigate();
-  useEffect$5(() => {
+  useEffect$4(() => {
     const performSearch = async () => {
       if (!searchTerm.trim()) {
         setSearchResults([]);
@@ -32159,11 +32600,13 @@ const HomePage = () => {
               placeholder: "Search for a country...",
               value: searchTerm,
               onChange: handleInputChange,
-              onKeyPress: handleKeyPress,
+              onKeyDown: handleKeyPress,
               onFocus: () => searchTerm && setShowDropdown(true),
               onBlur: () => setTimeout(() => setShowDropdown(false), 200),
-              InputProps: {
-                startAdornment: /* @__PURE__ */ jsxRuntimeExports.jsx(InputAdornment, { position: "start", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SearchOutlined, {}) })
+              slotProps: {
+                input: {
+                  startAdornment: /* @__PURE__ */ jsxRuntimeExports.jsx(InputAdornment, { position: "start", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SearchOutlined, {}) })
+                }
               },
               sx: {
                 width: "100%",
@@ -32222,16 +32665,16 @@ const HomePage = () => {
   ) });
 };
 
-const {useState: useState$5,useEffect: useEffect$4} = await importShared('react');
+const {useState: useState$4,useEffect: useEffect$3} = await importShared('react');
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState$5(searchParams.get("query") || "");
-  const [searchResults, setSearchResults] = useState$5([]);
-  const [isLoading, setIsLoading] = useState$5(false);
-  const [currentPage, setCurrentPage] = useState$5(1);
-  const [itemsPerPage] = useState$5(12);
-  const [sortOrder, setSortOrder] = useState$5(
+  const [searchTerm, setSearchTerm] = useState$4(searchParams.get("query") || "");
+  const [searchResults, setSearchResults] = useState$4([]);
+  const [isLoading, setIsLoading] = useState$4(false);
+  const [currentPage, setCurrentPage] = useState$4(1);
+  const [itemsPerPage] = useState$4(12);
+  const [sortOrder, setSortOrder] = useState$4(
     "default"
   );
   const sortCountries = (countries) => {
@@ -32251,7 +32694,7 @@ const Search = () => {
   const sortedResults = sortCountries(searchResults);
   const currentItems = sortedResults.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(searchResults.length / itemsPerPage);
-  useEffect$4(() => {
+  useEffect$3(() => {
     if (searchTerm) {
       performSearch();
     }
@@ -32522,7 +32965,7 @@ const remotesMap = {
                     return __federation_method_ensure(remoteName).then((remote) => remote.get(componentName).then(factory => factory()));
                 }
 
-const InfoRow$1 = ({ label, value }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Typography, { variant: "body1", sx: { mb: 1 }, children: [
+const InfoRow = ({ label, value }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Typography, { variant: "body1", sx: { mb: 1 }, children: [
   /* @__PURE__ */ jsxRuntimeExports.jsxs("strong", { children: [
     label,
     ":"
@@ -32530,132 +32973,114 @@ const InfoRow$1 = ({ label, value }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(T
   " ",
   value
 ] });
+
 const CountryBasicInfo = ({ country }) => {
   const formatCurrencies = () => {
-    if (!country.currencies) return "N/A";
+    if (!country.currencies) return "No currencies available";
     return Object.entries(country.currencies).map(([code, currency]) => `${currency.name} (${code})`).join(", ");
   };
   const infoItems = [
     { label: "Official Name", value: country.name.official },
-    { label: "Capital", value: country.capital?.join(", ") || "N/A" },
-    { label: "Region", value: country.region || "N/A" },
-    { label: "Subregion", value: country.subregion || "N/A" },
-    { label: "Borders", value: country.borders?.join(", ") || "N/A" },
-    { label: "Continent", value: country.continents?.join(", ") || "N/A" },
+    { label: "Capital", value: country.capital?.join(", ") },
+    { label: "Region", value: country.region },
+    { label: "Subregion", value: country.subregion },
+    { label: "Borders", value: country.borders?.join(", ") },
+    { label: "Continent", value: country.continents?.join(", ") },
     { label: "Landlocked", value: country.landlocked ? "Yes" : "No" },
     {
       label: "Population",
-      value: country.population?.toLocaleString() || "N/A"
+      value: country.population?.toLocaleString()
     },
-    { label: "Area", value: `${country.area?.toLocaleString() || "N/A"} km²` },
+    {
+      label: "Area",
+      value: country.area ? `${country.area.toLocaleString()} km²` : void 0
+    },
     {
       label: "Languages",
-      value: country.languages ? Object.values(country.languages).join(", ") : "N/A"
+      value: country.languages ? Object.values(country.languages).join(", ") : void 0
     },
     { label: "Currencies", value: formatCurrencies() },
-    { label: "Timezones", value: country.timezones?.join(", ") || "N/A" },
+    { label: "Timezones", value: country.timezones?.join(", ") },
     { label: "Independent", value: country.independent ? "Yes" : "No" },
     { label: "UN Member", value: country.unMember ? "Yes" : "No" }
-  ];
+  ].filter((item) => !!item.value);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { sx: { display: "flex", alignItems: "center", mb: 3 }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h4", component: "h1", gutterBottom: true, children: country.name?.common }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h6", color: "text.secondary", children: country.name?.official })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Box,
-        {
-          component: "img",
-          src: country.flags?.svg,
-          alt: `Flag of ${country.name?.common}`,
-          sx: {
-            width: 240,
-            objectFit: "cover",
-            ml: 2.5,
-            border: "1px solid #ccc"
-          }
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { sx: { boxShadow: 0 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { sx: { p: 0, "&:last-child": { pb: 0 } }, children: infoItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(InfoRow$1, { label: item.label, value: item.value }, item.label)) }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      Box,
+      {
+        sx: {
+          display: "flex",
+          alignItems: "center",
+          mb: 3,
+          flexWrap: "wrap",
+          gap: 2
+        },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h4", component: "h1", gutterBottom: true, children: country.name?.common }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h6", color: "text.secondary", children: country.name?.official })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Box,
+            {
+              component: "img",
+              src: country.flags?.svg,
+              alt: `Flag of ${country.name?.common}`,
+              sx: {
+                width: 240,
+                objectFit: "cover",
+                border: "1px solid #ccc"
+              }
+            }
+          )
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: infoItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(InfoRow, { label: item.label, value: item.value }, item.label)) }) })
   ] });
 };
 
-const InfoRow = ({
-  label,
-  value
-}) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Typography, { variant: "body1", sx: { mb: 1 }, children: [
-  /* @__PURE__ */ jsxRuntimeExports.jsxs("strong", { children: [
-    label,
-    ":"
-  ] }),
-  " ",
-  value
-] });
-const CountryWikiData = ({
-  wikiData,
-  loading
-}) => {
-  if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { sx: { boxShadow: 0 }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      CardContent,
-      {
-        sx: { textAlign: "center", py: 4, "&:last-child": { pb: 4 } },
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CircularProgress, { size: 40 }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "body2", color: "text.secondary", sx: { mt: 2 }, children: "Loading additional information..." })
-        ]
-      }
-    ) });
-  }
+const CountryWikiData = ({ wikiData }) => {
   if (!wikiData) {
     return null;
   }
-  const infoItems = [];
-  if (wikiData.religions?.length) {
-    infoItems.push({
+  const infoItems = [
+    {
       label: "Religions",
-      value: wikiData.religions.join(", ")
-    });
-  }
-  if (wikiData.ethnicGroups?.length) {
-    infoItems.push({
+      value: wikiData.religions?.join(", ")
+    },
+    {
       label: "Ethnic Groups",
-      value: wikiData.ethnicGroups.join(", ")
-    });
-  }
-  if (wikiData.governmentType?.trim()) {
-    infoItems.push({ label: "Government", value: wikiData.governmentType });
-  }
-  if (wikiData.hdi) {
-    infoItems.push({ label: "HDI", value: wikiData.hdi.toFixed(3) });
-  }
-  if (wikiData.gdpPerCapita) {
-    infoItems.push({
+      value: wikiData.ethnicGroups?.join(", ")
+    },
+    {
+      label: "Government",
+      value: wikiData.governmentType
+    },
+    {
+      label: "HDI",
+      value: wikiData.hdi?.toFixed(3)
+    },
+    {
       label: "GDP per Capita",
-      value: `$${wikiData.gdpPerCapita.toLocaleString()}`
-    });
-  }
-  if (wikiData.lifeExpectancy) {
-    infoItems.push({
+      value: wikiData.gdpPerCapita ? `$${wikiData.gdpPerCapita.toLocaleString()}` : void 0
+    },
+    {
       label: "Life Expectancy",
-      value: `${wikiData.lifeExpectancy.toFixed(1)} years`
-    });
-  }
-  if (wikiData.literacyRate) {
-    infoItems.push({
+      value: wikiData.lifeExpectancy ? `${wikiData.lifeExpectancy.toFixed(1)} years` : void 0
+    },
+    {
       label: "Literacy Rate",
-      value: `${wikiData.literacyRate.toFixed(1)}%`
-    });
-  }
+      value: wikiData.literacyRate ? `${wikiData.literacyRate.toFixed(1)}%` : void 0
+    }
+  ].filter((item) => !!item.value);
   if (infoItems.length === 0) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { sx: { boxShadow: 0 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { sx: { p: 0, "&:last-child": { pb: 0 } }, children: infoItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(InfoRow, { label: item.label, value: item.value }, item.label)) }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: infoItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(InfoRow, { label: item.label, value: item.value }, item.label)) }) });
 };
 
-const {useState: useState$4} = await importShared('react');
+const {useState: useState$3} = await importShared('react');
 const EXCLUDED_KEYWORDS = [
   "logo",
   "icon",
@@ -32665,63 +33090,21 @@ const EXCLUDED_KEYWORDS = [
   "semi-protection",
   "wiktionary"
 ];
-const ImageContainer = styled(Box)({
-  flex: 1,
-  height: "100%",
-  position: "relative",
-  backgroundColor: "#000",
-  overflow: "hidden"
-});
-const ImageElement = styled("img")({
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  objectPosition: "center"
-});
-const NavButton = styled(IconButton)({
-  position: "absolute",
-  top: "calc(50vh - 24px)",
-  backgroundColor: "rgba(0,0,0,0.6)",
-  color: "white",
-  width: 48,
-  height: 48,
-  "&:hover": {
-    backgroundColor: "rgba(0,0,0,0.8)"
+const NoImagesPlaceholder = () => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Box,
+  {
+    sx: {
+      flex: 1,
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#000",
+      color: "white"
+    },
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { children: "No images available" })
   }
-});
-const OverlayBox = styled(Box)({
-  position: "absolute",
-  backgroundColor: "rgba(0,0,0,0.8)",
-  color: "white",
-  padding: "8px 16px",
-  borderRadius: 4
-});
-const TitleBox = styled(OverlayBox)({
-  fontSize: 12,
-  maxWidth: 300,
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  transition: "all 0.25s ease",
-  cursor: "default",
-  "&:hover": {
-    whiteSpace: "normal",
-    overflow: "visible",
-    maxWidth: "none",
-    backgroundColor: "rgba(0,0,0,0.9)",
-    zIndex: 9999
-  }
-});
-const PlaceholderContainer = styled(Box)({
-  flex: 1,
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#000",
-  color: "white"
-});
-const NoImagesPlaceholder = () => /* @__PURE__ */ jsxRuntimeExports.jsx(PlaceholderContainer, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { children: "No images available" }) });
+);
 const filterImages = (images) => images.filter((img) => {
   const title = img.title.toLowerCase();
   const isValidType = img.preferred?.mediatype === "BITMAP";
@@ -32732,7 +33115,7 @@ const filterImages = (images) => images.filter((img) => {
   return isValidType && isLargeEnough && hasNoExcludedKeyword;
 });
 const CountryImages = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState$4(0);
+  const [currentIndex, setCurrentIndex] = useState$3(0);
   if (!images?.length) return /* @__PURE__ */ jsxRuntimeExports.jsx(NoImagesPlaceholder, {});
   const filteredImages = filterImages(images);
   if (!filteredImages.length) return /* @__PURE__ */ jsxRuntimeExports.jsx(NoImagesPlaceholder, {});
@@ -32742,19 +33125,123 @@ const CountryImages = ({ images }) => {
   const totalImages = filteredImages.length;
   const goPrev = () => setCurrentIndex((i) => i === 0 ? totalImages - 1 : i - 1);
   const goNext = () => setCurrentIndex((i) => i === totalImages - 1 ? 0 : i + 1);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ImageContainer, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ImageElement, { src: `https:${url}`, alt: current.title }),
-    totalImages > 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(NavButton, { onClick: goPrev, sx: { left: 20 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowBack, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(NavButton, { onClick: goNext, sx: { right: 20 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowForward, {}) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(OverlayBox, { sx: { top: 20, right: 20, fontWeight: "bold" }, children: [
-      currentIndex + 1,
-      " / ",
-      totalImages
-    ] }),
-    current.title && /* @__PURE__ */ jsxRuntimeExports.jsx(TitleBox, { sx: { top: 20, left: 20 }, children: current.title })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    Box,
+    {
+      sx: {
+        flex: 1,
+        height: "100%",
+        position: "relative",
+        backgroundColor: "#000",
+        overflow: "hidden"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Box,
+          {
+            component: "img",
+            src: `https:${url}`,
+            alt: current.title,
+            sx: {
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center"
+            }
+          }
+        ),
+        totalImages > 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            IconButton,
+            {
+              onClick: goPrev,
+              sx: {
+                position: "absolute",
+                top: "calc(50vh - 24px)",
+                left: 20,
+                backgroundColor: "rgba(0,0,0,0.6)",
+                color: "white",
+                width: 48,
+                height: 48,
+                "&:hover": {
+                  backgroundColor: "rgba(0,0,0,0.8)"
+                }
+              },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowBack, {})
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            IconButton,
+            {
+              onClick: goNext,
+              sx: {
+                position: "absolute",
+                top: "calc(50vh - 24px)",
+                right: 20,
+                backgroundColor: "rgba(0,0,0,0.6)",
+                color: "white",
+                width: 48,
+                height: 48,
+                "&:hover": {
+                  backgroundColor: "rgba(0,0,0,0.8)"
+                }
+              },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowForward, {})
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Box,
+          {
+            sx: {
+              position: "absolute",
+              top: 20,
+              right: 20,
+              backgroundColor: "rgba(0,0,0,0.8)",
+              color: "white",
+              padding: "8px 16px",
+              borderRadius: 1,
+              fontWeight: "bold"
+            },
+            children: [
+              currentIndex + 1,
+              " / ",
+              totalImages
+            ]
+          }
+        ),
+        current.title && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Box,
+          {
+            sx: {
+              position: "absolute",
+              top: 20,
+              left: 20,
+              backgroundColor: "rgba(0,0,0,0.8)",
+              color: "white",
+              padding: "8px 16px",
+              borderRadius: 1,
+              fontSize: 12,
+              maxWidth: 300,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              transition: "all 0.25s ease",
+              cursor: "default",
+              "&:hover": {
+                whiteSpace: "normal",
+                overflow: "visible",
+                maxWidth: "none",
+                backgroundColor: "rgba(0,0,0,0.9)",
+                zIndex: 9999
+              }
+            },
+            children: current.title
+          }
+        )
+      ]
+    }
+  );
 };
 
 function ok$1() {}
@@ -50995,7 +51482,7 @@ function isUint8Array(value) {
   )
 }
 
-const {useEffect: useEffect$3,useState: useState$3} = await importShared('react');
+const {useEffect: useEffect$2,useState: useState$2} = await importShared('react');
 
 const changelog =
   'https://github.com/remarkjs/react-markdown/blob/main/changelog.md';
@@ -51241,15 +51728,14 @@ function defaultUrlTransform(value) {
   return ''
 }
 
-const {useState: useState$2,useEffect: useEffect$2} = await importShared('react');
+const {useState: useState$1,useEffect: useEffect$1} = await importShared('react');
 const CountrySummary = ({ countryName }) => {
-  const [summary, setSummary] = useState$2(null);
-  const [loading, setLoading] = useState$2(false);
-  const [error, setError] = useState$2(null);
-  const [fromCache, setFromCache] = useState$2(false);
-  useEffect$2(() => {
+  const [summary, setSummary] = useState$1(null);
+  const [loading, setLoading] = useState$1(false);
+  const [error, setError] = useState$1(null);
+  const [fromCache, setFromCache] = useState$1(false);
+  useEffect$1(() => {
     const loadSummary = async () => {
-      if (!countryName) return;
       setLoading(true);
       setError(null);
       try {
@@ -51257,7 +51743,7 @@ const CountrySummary = ({ countryName }) => {
         setSummary(result.summary);
         setFromCache(result.fromCache);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load summary");
+        setError("Unable to generate summary. Please try again later.");
         console.error("Error loading summary:", err);
       } finally {
         setLoading(false);
@@ -51272,20 +51758,27 @@ const CountrySummary = ({ countryName }) => {
     ] }) }) });
   }
   if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { sx: { mb: 3 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Alert, { severity: "warning", children: error }) }) });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Alert, { severity: "warning", children: error }) }) });
   }
   if (!summary) {
     return null;
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { sx: {}, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { sx: { display: "flex", alignItems: "center", gap: 1, mb: 2 }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(AutoAwesomeIcon, { sx: { color: "#000" } }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h6", sx: { color: "#000", fontWeight: 600 }, children: "AI-Generated Summary" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(AutoAwesomeIcon, { sx: { color: "primary.main" } }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Typography,
+        {
+          variant: "h6",
+          sx: { color: "primary.main", fontWeight: 600 },
+          children: "AI-Generated Summary"
+        }
+      ),
       fromCache && /* @__PURE__ */ jsxRuntimeExports.jsx(
         Typography,
         {
           variant: "caption",
-          sx: { color: "rgba(0,0,0,0.8)", ml: "auto" },
+          sx: { color: "secondary.main", ml: "auto" },
           children: "(cached)"
         }
       )
@@ -51294,7 +51787,7 @@ const CountrySummary = ({ countryName }) => {
       Box,
       {
         sx: {
-          color: "#000",
+          color: "primary.secondary",
           lineHeight: 1.8,
           "& h1, & h2, & h3": {
             marginTop: 2,
@@ -51328,73 +51821,74 @@ const CountrySummary = ({ countryName }) => {
   ] }) });
 };
 
-const {useState: useState$1,useEffect: useEffect$1,lazy,Suspense} = await importShared('react');
-const PageContainer = styled(Box)({
-  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-  display: "flex",
-  overflow: "hidden"
-});
-const ContentPanel = styled(Box)({
-  flex: "0 0 50%",
-  overflowY: "auto",
-  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-  padding: "32px 24px"
-});
-const ImagePanel = styled(Box)({
-  flex: "0 0 50%",
-  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-  position: "relative",
-  backgroundColor: "#000"
-});
+const {lazy,Suspense} = await importShared('react');
 const WeatherApp = lazy(
   () => __federation_method_getRemote("weatherRemote" , "./WeatherApp").then(module=>__federation_method_wrapDefault(module, true)).catch(() => ({
     default: () => /* @__PURE__ */ jsxRuntimeExports.jsx(Alert, { severity: "warning", children: "Failed to load Weather Widget" })
   }))
 );
-const CountryDetailsPage = () => {
-  const { code } = useParams();
-  const [country, setCountry] = useState$1(null);
-  const [loading, setLoading] = useState$1(true);
-  useEffect$1(() => {
-    const loadCountryData = async () => {
-      if (!code) return;
-      setLoading(true);
-      try {
-        const countryData = await getCountryByCode(code.toUpperCase());
-        setCountry(countryData);
-      } catch (error) {
-        console.error("Error loading country data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadCountryData();
-  }, [code]);
-  if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Container,
-      {
-        maxWidth: "lg",
-        sx: { display: "flex", justifyContent: "center", mt: 8 },
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircularProgress, {})
-      }
+const countryLoader = async ({ params }) => {
+  const code = params.code;
+  if (!code) {
+    throw new Response(
+      "Country code is required to fetch country information",
+      { status: 400 }
     );
   }
-  if (!country) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Container, { maxWidth: "lg", sx: { mt: 4 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Alert, { severity: "error", children: "Country not found" }) });
+  try {
+    const countryData = await getCountryByCode(code.toUpperCase());
+    return countryData;
+  } catch (error) {
+    console.error("Error loading country data:", error);
+    throw new Response("Country not found", { status: 404 });
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(PageContainer, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ContentPanel, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { sx: { maxWidth: 600, mx: "auto" }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CountryBasicInfo, { country }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { sx: { mt: 3 }, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h6", sx: { mb: 2, color: "primary.main" }, children: "Additional Information" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CountryWikiData, { wikiData: country.wikiData })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(CountrySummary, { countryName: country.name.common }),
-      country.capital?.[0] && /* @__PURE__ */ jsxRuntimeExports.jsx(Box, { sx: { mt: 3, display: "flex", justifyContent: "center" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(CircularProgress, { size: 24 }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(WeatherApp, { city: country.capital[0] }) }) })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ImagePanel, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CountryImages, { images: country.wikiData?.images }) })
-  ] });
+};
+const CountryDetailsPage = () => {
+  const country = useLoaderData();
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    Box,
+    {
+      sx: {
+        height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+        display: "flex",
+        overflow: "hidden"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Box,
+          {
+            sx: {
+              flex: "0 0 50%",
+              overflowY: "auto",
+              height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+              padding: "32px 24px"
+            },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { sx: { maxWidth: 600, mx: "auto" }, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CountryBasicInfo, { country }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(Box, { sx: { mt: 3 }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Typography, { variant: "h6", sx: { mb: 2, color: "primary.main" }, children: "Additional Information" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(CountryWikiData, { wikiData: country.wikiData })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CountrySummary, { countryName: country.name.common }),
+              country.capital?.[0] && /* @__PURE__ */ jsxRuntimeExports.jsx(Box, { sx: { mt: 3, display: "flex", justifyContent: "center" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(CircularProgress, { size: 24 }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(WeatherApp, { city: country.capital[0] }) }) })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Box,
+          {
+            sx: {
+              flex: "0 0 50%",
+              height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+              position: "relative",
+              backgroundColor: "#000"
+            },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(CountryImages, { images: country.wikiData?.images })
+          }
+        )
+      ]
+    }
+  );
 };
 
 // https://github.com/python/cpython/blob/a74eea238f5baba15797e2e8b570d153bc8690a7/Modules/mathmodule.c#L1423
@@ -59052,7 +59546,7 @@ Annotation.propTypes = {
   className: PropTypes.string
 };
 
-const geoUrl = "/ne_10m_admin_0_countries_lakes.json";
+const geoUrl = `${"/gaia-staging/"}ne_10m_admin_0_countries_lakes.json`;
 const WorldMap = () => {
   const navigate = useNavigate();
   const handleCountryClick = (geo) => {
@@ -59146,7 +59640,11 @@ const router = createBrowserRouter(
       children: [
         { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(HomePage, {}) },
         { path: "search", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Search, {}) },
-        { path: "country/:code", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CountryDetailsPage, {}) },
+        {
+          path: "country/:code",
+          element: /* @__PURE__ */ jsxRuntimeExports.jsx(CountryDetailsPage, {}),
+          loader: countryLoader
+        },
         { path: "map", element: /* @__PURE__ */ jsxRuntimeExports.jsx(WorldMap, {}) }
       ]
     }
